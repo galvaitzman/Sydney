@@ -1,29 +1,22 @@
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser');
 var app = express();
 var DButilsAzure = require('../DButils');
-var Regex = require("regex");
 var jwt = require('jsonwebtoken');
-var  superSecret = "SUMsumOpen";
 var currentUserName = 'galvai';
 var POSITION = 0;
 
-
-router.use('/', (req, res, next) => {
-    var token = req.body.token || req.query.token || req.header('token');  
-    // no token
-    if (!token) res.status(401).send("Access denied. No token provided.");
-    // verify token
-    try {
-        const decoded = jwt.verify(token, 'superSecret');
-        req.decoded = decoded;
-        currentUserName = decoded.USER_NAME;
-        next(); //move on to the actual function
-    } 
-    catch (exception) {
-        res.status(400).send("Invalid token.");
-    }
+router.get('/getAllPoints',function (req,res) 
+    {
+        let sql ="select * from POIS order by CATEGORY";
+        DButilsAzure.execQuery(sql)   
+        .then(function(ans) {
+                res.json({
+                    poi: ans
+                });	
+            }
+       )
+       
 });
 
 
@@ -45,6 +38,95 @@ DButilsAzure.execQuery("select * from POIS where RANK >= "+threshHole+"")
     }
 )
 .catch(ans=>res.send("" +ans));
+});
+
+
+router.get('/getTwoLastReviewsOnPoint',function (req,res) {
+    if (!req.query.POI_ID){
+        res.send("no such attribute POI_ID in the given query");
+    }
+    var POI_ID=req.query.POI_ID;
+    let sql ="UPDATE POIS SET NOV = NOV + 1 WHERE POI_ID ="+POI_ID;
+    DButilsAzure.execQuery(sql)
+    .then(function(ans) {
+        var x=1;
+    })
+    .catch(ans=>res.send("illegal update"));
+    let sql2 ="select top 2 * from REVIEWS where POI_ID ='"+POI_ID+"' order by REVIEW_ID DESC";
+    DButilsAzure.execQuery(sql2)    
+    .then(function(ans2) {
+        if (ans2.length == 0)
+            res.send('no reviews for this POI');
+        else{  
+            res.send(ans2);
+        }
+    })
+    .catch(ans=>res.send("error"));
+});
+
+
+router.post('/reviewPoint',function (req,res) {
+    if (!req.body.POI_ID || !req.body.REVIEW || !req.body.rank){
+        res.send('one of the requierd attribute was not provided');
+    }
+    var POI_ID =req.body.POI_ID;
+    var Review =req.body.REVIEW;
+    var rank = req.body.rank;
+    let sql ="UPDATE POIS SET NOR = NOR + 1 WHERE POI_ID ='"+POI_ID+"'";
+    DButilsAzure.execQuery(sql);
+    let sql4 ="UPDATE POIS SET RANK = (RANK * (NOR-1) + '"+rank+"')/NOR  WHERE POI_ID ='"+POI_ID+"'";
+    DButilsAzure.execQuery(sql4);
+    //let sql2="select count * as numberOfReviews FROM REVIEWS"; 
+    //DButilsAzure.execQuery(sql2)    
+    //.then(function(ans) {
+        let sql3 ="insert into REVIEWS (POI_ID,REVIEW,DATE) values('"+POI_ID+"','"+Review+"',GETDATE())";
+        DButilsAzure.execQuery(sql3)    
+        .then(function(ans) {
+            console.log(ans)
+        }).then(ans=> res.send("TRUE"))
+        .catch(function(err){
+            res.send(err);
+        })
+    //})
+    //.then(ans=> res.send("TRUE"))
+    //.catch(ans=>res.send("FALSE"));
+});
+
+
+router.get('/Category',function (req,res) {
+    if (!req.query.CATEGORY){
+        res.send('no CATEGORY attribute');
+    }
+    var Category = req.query.CATEGORY;
+    let sql ="select * from POIS where CATEGORY ='"+Category+"'";
+    DButilsAzure.execQuery(sql)    
+    .then(function(ans) {
+        if (ans.length ==0){
+            res.send(ans);
+        }
+        else if (!(ans[0].CATEGORY=== Category)) {
+            res.send(Category);}
+        else{  
+            res.send(ans);
+        }
+    })
+   .catch(ans=>res.send("catch"));
+});
+
+router.use('/', (req, res, next) => {
+    var token = req.body.token || req.query.token || req.header('token');  
+    // no token
+    if (!token) res.status(401).send("Access denied. No token provided.");
+    // verify token
+    try {
+        const decoded = jwt.verify(token, 'superSecret');
+        req.decoded = decoded;
+        currentUserName = decoded.USER_NAME;
+        next(); //move on to the actual function
+    } 
+    catch (exception) {
+        res.status(400).send("Invalid token.");
+    }
 });
 
 
@@ -111,44 +193,6 @@ router.get('/getTwoLastSavedPoints',function (req,res) {
     
         .catch(ans=>res.send("," + ans.length + ","));          
     });
-
-
-router.get('/getTwoLastReviewsOnPoint',function (req,res) {
-            if (!req.query.POI_ID){
-                res.send("no such attribute POI_ID in the given query");
-            }
-			var POI_ID=req.query.POI_ID;
-			let sql ="UPDATE POIS SET NOV = NOV + 1 WHERE POI_ID ="+POI_ID;
-            DButilsAzure.execQuery(sql)
-            .then(function(ans) {
-                var x=1;
-            })
-			.catch(ans=>res.send("illegal update"));
-            let sql2 ="select top 2 * from REVIEWS where POI_ID ='"+POI_ID+"' order by REVIEW_ID DESC";
-            DButilsAzure.execQuery(sql2)    
-            .then(function(ans2) {
-                if (ans2.length == 0)
-                    res.send('no reviews for this POI');
-                else{  
-                    res.send(ans2);
-                }
-            })
-			.catch(ans=>res.send("goni3"));
-});
-
-
-router.get('/getAllPoints',function (req,res) 
-    {
-        let sql ="select * from POIS";
-        DButilsAzure.execQuery(sql)   
-        .then(function(ans) {
-                res.json({
-                    poi: ans
-                });	
-            }
-       )
-       
-});
 
 
 router.get('/getAllSavedPoints',function (req,res) {
@@ -227,32 +271,7 @@ router.post('/saveFavoritePoint', function (req, res) {
 });
 
 
-router.post('/reviewPoint',function (req,res) {
-        if (!req.body.POI_ID || !req.body.REVIEW || !req.body.rank){
-            res.send('one of the requierd attribute was not provided');
-        }
-		var POI_ID =req.body.POI_ID;
-		var Review =req.body.REVIEW;
-		var rank = req.body.rank;
-		let sql ="UPDATE POIS SET NOR = NOR + 1 WHERE POI_ID ='"+POI_ID+"'";
-		DButilsAzure.execQuery(sql);
-		let sql4 ="UPDATE POIS SET RANK = (RANK * (NOR-1) + '"+rank+"')/NOR  WHERE POI_ID ='"+POI_ID+"'";
-		DButilsAzure.execQuery(sql4);
-		//let sql2="select count * as numberOfReviews FROM REVIEWS"; 
-		//DButilsAzure.execQuery(sql2)    
-		//.then(function(ans) {
-			let sql3 ="insert into REVIEWS (POI_ID,REVIEW,DATE) values('"+POI_ID+"','"+Review+"',GETDATE())";
-			DButilsAzure.execQuery(sql3)    
-			.then(function(ans) {
-				console.log(ans)
-			}).then(ans=> res.send("TRUE"))
-			.catch(function(err){
-                res.send(err);
-            })
-		//})
-		//.then(ans=> res.send("TRUE"))
-		//.catch(ans=>res.send("FALSE"));
-});
+
 
 
 router.delete('/removeFavoritePoint', function (req, res) {
@@ -286,47 +305,6 @@ function shuffle(array) {
 
   return array;
 }
-
-// router.use("/", (req, res) => {
-//     const token = req.header("x-auth-token");
-//     // no token
-//     if (!token) res.status(401).send("Access denied. No token provided.");
-//     // verify token
-//     try {
-//         const decoded = jwt.verify(token, secret);
-//         req.decoded = decoded;
-//         if (req.decoded.admin)
-//             res.status(200).send({ result: "Hello admin." });
-//         else
-//             res.status(200).send({ result: "Hello user." });
-//     } catch (exception) {
-//         res.status(400).send("Invalid token.");
-//     }
-// });
-
-
-
-
- 
-router.get('/Category',function (req,res) {
-        if (!req.query.CATEGORY){
-            res.send('no CATEGORY attribute');
-        }
-		var Category = req.query.CATEGORY;
-		let sql ="select * from POIS where CATEGORY ='"+Category+"'";
-		DButilsAzure.execQuery(sql)    
-		.then(function(ans) {
-            if (ans.length ==0){
-                res.send(ans);
-            }
-			else if (!(ans[0].CATEGORY=== Category)) {
-				res.send(Category);}
-			else{  
-				res.send(ans);
-			}
-		})
-	   .catch(ans=>res.send("catch"));
-});
 
 
 router.post('/setNewOrderForSavedPoints',function (req,res) {

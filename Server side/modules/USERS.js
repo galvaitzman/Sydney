@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser');
 var app = express();
 var DButilsAzure = require('../DButils');
-//var Regex = require("regex");
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var  superSecret = "SUMsumOpen";
 var Countries = ["Ausralia","Bolovia","China","Denemark","Israel","Latvia","Monaco","August","Norway","Panama","Switzerland","USA"];
 
 
