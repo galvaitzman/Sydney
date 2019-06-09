@@ -11,14 +11,16 @@ router.post("/Login", function(req, res) {
     var userPass = req.body;
     var name = userPass.USER_NAME;
     var password = userPass.PASSWORD;
-    DButilsAzure.execQuery("SELECT PASSWORD FROM USERS WHERE USER_NAME= '"+name+"'")
-    .then(function(result) {
-        if(result.length == 0)
+
+    console.log(req.body);
+
+    DButilsAzure.execQuery("SELECT PASSWORD FROM USERS WHERE USER_NAME= '"+name+"'").then(function(result) {
+        console.log(result);
+        if(result.length == 0) {
             return Promise.reject('Wrong Username');
-        else if (!(result[0].PASSWORD === userPass.PASSWORD)) {
+        } else if (!(result[0].PASSWORD === userPass.PASSWORD)) {
             return Promise.reject('Wrong Password');
-        }      
-        else{
+        } else{
             payload = {  USER_NAME: name, admin: true };
             options = { expiresIn: "1d" };
             const token = jwt.sign(payload, 'superSecret', options);
@@ -26,8 +28,7 @@ router.post("/Login", function(req, res) {
         }   
            		        
       }
-    )
-    .catch(ans=>res.send("FALSE"));
+    ).catch(ans=>res.send("aviya FALSE"));
 });
 
 router.post('/Register', function (req, res) {
