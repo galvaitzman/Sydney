@@ -14,7 +14,19 @@ angular.module("myApp").service('LoginServices',[ '$http', function ($http) {
             },
             data: userToPass
         };
-      return $http(req);
+/*
+        $http(req)
+            .then(
+                function(response){
+                    debugger;
+                    // success callback
+                }, function(response){
+                    debugger;
+                    // failure callback
+                }
+            );
+*/
+         return $http(req);
         // return  $http.post("http://localhost:3000/USERS/Login", userToPass);
     }
 /*
@@ -48,9 +60,8 @@ angular.module("myApp").service('LoginServices',[ '$http', function ($http) {
                 //$scope.massage=response.data;
                 alert(response.data);
                 // TODO after the authentication succeeded - move to the next page
-                // TODO forgot my password
+                // TODO add current_user field (to the start of the controller) and set the current user to be the label USER_NAME
             } else{
-                //TODO:REMOVE after moving to the new page
                 alert("success");
                 current_user=userToPass.USER_NAME;
                 current_token=response.data;

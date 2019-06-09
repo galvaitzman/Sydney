@@ -17,9 +17,9 @@ router.post("/Login", function(req, res) {
     DButilsAzure.execQuery("SELECT PASSWORD FROM USERS WHERE USER_NAME= '"+name+"'").then(function(result) {
         console.log(result);
         if(result.length == 0) {
-            return Promise.reject('Wrong Username');
+            return res.send('Wrong Username');
         } else if (!(result[0].PASSWORD === userPass.PASSWORD)) {
-            return Promise.reject('Wrong Password');
+            return res.send('Wrong Password');
         } else{
             payload = {  USER_NAME: name, admin: true };
             options = { expiresIn: "1d" };
