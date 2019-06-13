@@ -116,22 +116,29 @@ router.post('/Register', function (req, res) {
             let sql2 =  "insert into ANSWERS_USER values('" + userName + "','" + req.body.QuestionsAnswers[i].QUESTION_ID + "','" + req.body.QuestionsAnswers[i].ANSWER + "')";
             DButilsAzure.execQuery(sql2)
                 .then(function(ans){
-                res.send("registed successfuly");
+                //res.send("registed successfuly");
             })
-                .catch(ans=>res.send("something went wrong. please try again"));;
+                .catch(function(ans){
+                 res.send("something went wrong. please try again");
+                 return;
+                });
         }
          
         for (var i=0; i< req.body.favoriteCategories.length; i=i+1) {
             let sql4 =  "insert into FAVOURITE_CATEGORIES values('" + userName + "','" + req.body.favoriteCategories[i] + "')";
             DButilsAzure.execQuery(sql4)
             .then(function(ans){
-                res.send("registed successfuly");
-            })        
-            .catch(ans=>res.send("something went wrong. please try again"));
+                //res.send("registed successfuly");
+            })
+                .catch(function(ans){
+                    res.send("something went wrong. please try again");
+                    return;
+                });
         }
-        
-        //sendToken(userName,password,res) ;
-      
+        res.send("registed successfuly");
+        return;
+        //TODO: abort when someting went wrong
+        //TODO:sendToken(userName,password,res) ;
     })        
     .catch(ans=>res.send("error" +ans));
 });

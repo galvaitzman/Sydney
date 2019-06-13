@@ -62,7 +62,7 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
 .controller('registerController', function ($scope,$http,registerServices){
 
     var self = this;
-
+// TODO: move http function to Service
     $http({
         method: 'GET',
         url: "http://localhost:3000/USERS/getAllQuestions",
@@ -156,7 +156,7 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
 
 
         console.log(userToPass.toString());
-
+        // TODO: change the alerts to informative message on the html page
         registerServices.Register(userToPass).then(function (response){
             if(response.data == "Please Choose Another User Name") {
                 //$scope.massage=response.data;

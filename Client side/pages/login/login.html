@@ -1,5 +1,5 @@
 
-<form class= "logIn-form" name="form" role="form"  ng-show="!show">
+<form class= "logIn-form" name="form" role="form">
 <div class="form-group" ng-class="{ 'has-error': form.USER_NAME.$dirty && form.USER_NAME.$error.required }">
             <label for="USER_NAME">User Name</label>
             <input  type="text"
@@ -26,8 +26,21 @@
 </div>
 
 <div class="form-actions">
-               <a  href="" class="btn btn-link" type="submit" ng-disabled="form.$invalid || loginCtrl.dataLoading" class="btn btn-primary"
+               <a  href="" class="btn btn-link" type="submit" ng-disabled="form.$invalid" class="btn btn-primary"
                        ng-click="loginCtrl.Login()">Submit</a>
        </div>
-       <a  href="#/RestorePassword" class="btn btn-link">Forgot Your Password?</a>
+    <a  href="#!forgotPassword" class="btn btn-link">Forgot your password?</a>
+    <br>
+    <a href="#!register">Register</a>
+
+
+
+
+
+    <p ng-repeat="poi in random3POIlist">
+    POI Name: {{ poi.NAME }}<br>
+    POI Rank: {{ poi.RANK }}<br>
+    <img ng-src="{{ poi.IMAGE }}">
+</p>
+
 </form>

@@ -14,15 +14,6 @@ app.config(function($routeProvider)  {
             templateUrl: 'pages/about/about.html',
             controller : 'aboutController as abtCtrl'
         })
-        // poi
-        .when('/poi', {
-            templateUrl: 'pages/poi/poi.html',
-            controller : 'poiController as poiCtrl'
-        })
-        .when('/httpRequest', {
-            templateUrl: 'pages/http/request.html',
-            controller : 'httpController as httpCtrl'
-        })
         .when('/login', {
             templateUrl: 'pages/login/login.html',
             controller : 'loginController as loginCtrl'
@@ -30,6 +21,11 @@ app.config(function($routeProvider)  {
         .when('/register', {
             templateUrl: 'pages/register/register.html',
             controller : 'registerController as registerCtrl',
+        })
+        .when('/forgotPassword', {
+            // this is a template url
+            templateUrl: 'pages/forgotPassword/forgotPassword.html',
+            controller : 'forgotPasswordController as forgotPassCtrl'
         })
         // other
         .otherwise({ redirectTo: '/' });
