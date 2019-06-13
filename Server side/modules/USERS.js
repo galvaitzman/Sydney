@@ -186,14 +186,16 @@ router.post('/RetrievePassword',function (req,res) {
     var question = userToCheck.QUESTION;
     DButilsAzure.execQuery("select * from ANSWERS_USER where USER_NAME = '"+userName+"' and QUESTION_ID ='"+question+"'")    
         .then(function(ans) {		   
-            if (ans.length == 0)
-                return Promise.reject('the given user did not answer the given question when registerd');		
+            if (ans.length == 0) {
+                return Promise.reject('the given user did not answer the given question when registerd');
+            }
             else
             {
                 if (ans[0].ANSWER == answer){
                     DButilsAzure.execQuery("select PASSWORD from USERS where USER_NAME = '"+userName+"'")
                     .then(function(ans2) {
-                        res.send(ans2[0].PASSWORD);		   
+                        res.send(ans2[0].PASSWORD);
+                        return;
                     })
                     .catch(ans2=>res.send("error"));
                 }

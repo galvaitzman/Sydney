@@ -45,8 +45,8 @@
       <file leaf-file-name="forgotPassword.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/forgotPassword/forgotPassword.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="86" lean-forward="false" selection-start-line="22" selection-start-column="86" selection-end-line="22" selection-end-column="86" />
+            <state relative-caret-position="480">
+              <caret line="38" column="21" lean-forward="false" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#div#1;n#form#0;n#!!top" expanded="true" />
@@ -58,8 +58,8 @@
       <file leaf-file-name="forgotPasswordController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/forgotPassword/forgotPasswordController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="64" lean-forward="false" selection-start-line="6" selection-start-column="64" selection-end-line="6" selection-end-column="64" />
+            <state relative-caret-position="139">
+              <caret line="32" column="26" lean-forward="true" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -68,7 +68,7 @@
       <file leaf-file-name="registerController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/register/registerController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="2460">
               <caret line="164" column="24" lean-forward="false" selection-start-line="164" selection-start-column="23" selection-end-line="164" selection-end-column="24" />
               <folding />
             </state>
@@ -110,8 +110,8 @@
       <file leaf-file-name="loginController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/login/loginController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+            <state relative-caret-position="377">
+              <caret line="74" column="16" lean-forward="false" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -143,7 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>country_list</find>
       <find>demo</find>
       <find>email</find>
       <find>questaions</find>
@@ -166,13 +165,14 @@
       <find>ng-re</find>
       <find>questai</find>
       <find>option</find>
-      <find>ques</find>
       <find>in</find>
-      <find>parse</find>
       <find>repe</find>
       <find>ctr</find>
+      <find>parse</find>
+      <find>login</find>
       <find>show</find>
       <find>self</find>
+      <find>ques</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -306,12 +306,12 @@
       <option name="presentableId" value="Default" />
       <updated>1559984744252</updated>
       <workItem from="1559984747186" duration="41435000" />
-      <workItem from="1560358376651" duration="20226000" />
+      <workItem from="1560358376651" duration="27513000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61661000" />
+    <option name="totallyTimeSpent" value="68948000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -466,22 +466,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/register/registerController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="164" column="24" lean-forward="false" selection-start-line="164" selection-start-column="23" selection-end-line="164" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="56" lean-forward="false" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/register/register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -518,6 +502,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="56" lean-forward="false" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/forgotPassword/forgotPassword.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="38" column="21" lean-forward="false" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#form#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pages/login/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -530,27 +533,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/login/loginController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+        <state relative-caret-position="377">
+          <caret line="74" column="16" lean-forward="false" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/forgotPassword/forgotPassword.html">
+    <entry file="file://$PROJECT_DIR$/pages/register/registerController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="86" lean-forward="false" selection-start-line="22" selection-start-column="86" selection-end-line="22" selection-end-column="86" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#1;n#form#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="2460">
+          <caret line="164" column="24" lean-forward="false" selection-start-line="164" selection-start-column="23" selection-end-line="164" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/forgotPassword/forgotPasswordController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="64" lean-forward="false" selection-start-line="6" selection-start-column="64" selection-end-line="6" selection-end-column="64" />
+        <state relative-caret-position="139">
+          <caret line="32" column="26" lean-forward="true" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
           <folding />
         </state>
       </provider>
