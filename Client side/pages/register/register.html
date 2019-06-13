@@ -1,0 +1,186 @@
+
+<form class= "register-form" name="form" role="form"  ng-show="!show">
+        <div class="form-group" ng-class="{ 'has-error': form.USER_NAME.$dirty && form.USER_NAME.$error.required }">
+                    <label for="USER_NAME">User Name</label>
+                    <input  type="text"
+                            name="USER_NAME"
+                             style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                            id="USER_NAME" class="form-control"
+                            ng-model="registerCtrl.USER_NAME"
+                            placeholder="Enter Username"
+                            autocomplete="off"
+                            ng-pattern="/^[a-zA-Z\s]*$/"
+                            ng-maxlength="8"
+                            ng-minlength="3"
+
+                            required/>
+                    <span ng-show="form.USER_NAME.$error.maxlength">* Must contain a maximum of 8 characters</span>
+                    <span ng-show="form.USER_NAME.$error.minlength">* Must contain at least 3 characters</span>
+                    <span ng-show="form.USER_NAME.$error.pattern">* Must contain only letters</span>
+                    <span ng-show="form.USER_NAME.$dirty && form.USER_NAME.$error.required" class="help-block">User name is required</span>
+                    <p>{{userNameError}}</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': form.FirstName.$dirty && form.FirstName.$error.required }" >
+            <label for="FirstName">First Name</label>
+            <input type="text"
+                   name="FirstName"
+                   placeholder="Enter your first name"
+                   style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                   id="FirstName" class="form-control"
+                   ng-model="registerCtrl.FirstName" required/>
+            <span ng-show="form.FirstName.$dirty && form.FirstName.$error.required" class="help-block">First name is required</span>
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': form.LastName.$dirty && form.LastName.$error.required }" >
+            <label for="LastName">Last Name</label>
+            <input type="text"
+                   name="LastName"
+                   placeholder="Enter your last name"
+                   style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                   id="LastName"
+                   class="form-control"
+                   ng-model="registerCtrl.LastName" required/>
+            <span ng-show="form.LastName.$dirty && form.LastName.$error.required" class="help-block">Last name is required</span>
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': form.City.$dirty && form.City.$error.required }" >
+            <label for="City">City</label>
+            <input type="text"
+                   name="City"
+                   placeholder="Enter your last city"
+                   style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                   id="City" class="form-control"
+                   ng-model="registerCtrl.City" required/>
+            <span ng-show="form.City.$dirty && form.City.$error.required" class="help-block">City is required</span>
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': form.Country.$dirty && form.Country.$error.required }" ng-init = "myFunc()" >
+            <label for="Country">Country</label>
+            <select type="text"
+                    class="form-control"
+                    name="Country"
+                    style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                    id="Country"
+                    ng-model="registerCtrl.Country" required>
+                <option ng-repeat="country in countries_list" value="{{country.Name}}">
+                    {{country.Name}}
+                </option>
+            </select>
+            <span ng-show="form.Country.$dirty && form.Country.$error.required" class="help-block">Country is required</span>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': form.Email.$dirty && form.Email.$error.required }" >
+            <label for="Email">Email</label>
+            <input type="email"
+                   name="Email"
+                   placeholder="Enter your email"
+                   style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                   id="Email" class="form-control"
+                   ng-model="registerCtrl.Email" required/>
+            <span ng-show="form.Email.$dirty && form.Email.$error.required" class="help-block">Email is required</span>
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': form.PASSWORD.$dirty && form.PASSWORD.$error.required }" >
+            <label for="PASSWORD">Password</label>
+            <input type="password"
+                   name="PASSWORD"
+                   placeholder="Enter Password"
+                   style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                   id="PASSWORD" class="form-control"
+                   ng-maxlength="10"
+                   ng-minlength="5"
+                   ng-pattern="/^[a-zA-Z0-9.]*$/"
+                   ng-model="registerCtrl.PASSWORD" required/>
+            <span ng-show="form.PASSWORD.$error.maxlength">* Must contain a maximum of 10 characters</span>
+            <span ng-show="form.PASSWORD.$error.minlength">* Must contain at least 5 characters</span>
+            <span ng-show="form.PASSWORD.$error.pattern">* Must contain only numbers and letters</span>
+            <span ng-show="form.PASSWORD.$dirty && form.PASSWORD.$error.required" class="help-block">Password is required</span>
+        </div>
+
+    <!--
+        <select multiple>
+            <option value="1">Blue</option>
+            <option value="2">Green</option>
+            <option value="3">Yellow</option>
+            <option value="4">Red</option>
+        </select>
+-->
+
+
+    <div class="form-group" ng-class="{ 'has-error': form.ques1.$dirty && form.ques1.$error.required }" ng-init = "myFunc()" >
+        <select type="text"
+                class="form-control"
+                name="ques1"
+                style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                id="ques1"
+                ng-model="registerCtrl.ques1" required>
+            <option ng-repeat="ques in questions" value="{{ques.QUESTION}}">
+                {{ques.QUESTION}}
+            </option>
+        </select>
+        <br>
+        <input type="text"
+               name="ans1"
+               placeholder="Enter your answer to the first question"
+               style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+               id="ans1" class="form-control"
+               ng-model="registerCtrl.ans1" required/>
+        <span ng-show="form.ques1.$dirty && form.ques1.$error.required" class="help-block">question 1 is required</span>
+    </div>
+
+
+    <div class="form-group" ng-class="{ 'has-error': form.ques2.$dirty && form.ques2.$error.required }" ng-init = "myFunc()" >
+        <select type="text"
+                class="form-control"
+                name="ques2"
+                style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                id="ques2"
+                ng-model="registerCtrl.ques2" required>
+            <option ng-repeat="ques in questions" value="{{ques.QUESTION}}">
+                {{ques.QUESTION}}
+            </option>
+        </select>
+        <br>
+        <input type="text"
+               name="ans2"
+               placeholder="Enter your answer to the first question"
+               style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+               id="ans2" class="form-control"
+               ng-model="registerCtrl.ans2" required/>
+        <span ng-show="form.ques2.$dirty && form.ques2.$error.required" class="help-block">question 2 is required</span>
+    </div>
+
+
+
+        <div class="form-actions">
+                       <a  href="" class="btn btn-link" type="submit" ng-disabled="form.$invalid || registerCtrl.dataLoading" class="btn btn-primary"
+                               ng-click="registerCtrl.Register()">Register
+                       </a>
+        </div>
+
+
+
+
+<!--
+        <div ng-controller="mainCtrl">
+            <div class="row">
+                <div ng-controller="chipsSelectCtrl">
+                    <span>You have selected: {{myItems}} </span>
+                    <md-chips-select ng-model="myItems" select-items="sItems" main-title="name"></md-chips-select>
+                </div>
+            </div>
+            <div class="row" style="margin-top:60px;">
+                <div ng-controller="cChipsSelectCtrl">
+                    <span>Where have you been: {{selectedCoutries}} </span>
+                    <md-chips-select ng-model="selectedCoutries" select-items="countiesList" main-title="country id"></md-chips-select>
+                </div>
+            </div>
+        </div>
+-->
+</form>
+

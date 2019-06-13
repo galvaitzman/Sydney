@@ -1,0 +1,30 @@
+body{
+  background-color:#eeeeee;
+}
+
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+
+          }
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: top;
+  padding: 1px 30px;
+  text-decoration: none;
+  font-size: 20px;
+          }
+
+.navbar a:hover {
+  background: rgb(221, 217, 217);
+  color: black;
+                }
+

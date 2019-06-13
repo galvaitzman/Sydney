@@ -114,7 +114,11 @@ router.post('/Register', function (req, res) {
        
         for (var i=0; i< req.body.QuestionsAnswers.length; i=i+1) {
             let sql2 =  "insert into ANSWERS_USER values('" + userName + "','" + req.body.QuestionsAnswers[i].QUESTION_ID + "','" + req.body.QuestionsAnswers[i].ANSWER + "')";
-            DButilsAzure.execQuery(sql2);
+            DButilsAzure.execQuery(sql2)
+                .then(function(ans){
+                res.send("registed successfuly");
+            })
+                .catch(ans=>res.send("something went wrong. please try again"));;
         }
          
         for (var i=0; i< req.body.favoriteCategories.length; i=i+1) {
@@ -138,6 +142,7 @@ router.get('/getAllQuestions',function(req,res) {
     let sql = "select * from QUESTIONS";
     DButilsAzure.execQuery(sql)
     .then(function(ans){
+        console.log(ans);
         res.send(ans);
     })        
     .catch(ans=>res.send("error"));
