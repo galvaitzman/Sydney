@@ -60,7 +60,7 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
         var self = this;
         $scope.allcategories=[];
         $scope.poisToShow=[];
-            $scope.poisToShowAfterOrder=[];
+        $scope.poisToShowAfterOrder=[];
 
         function initPoints() {
             POIServices.getAllPoints().then(function (response) {
@@ -71,7 +71,7 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
                 //TODO:Chnage all the alert in this controller
                 alert("Get all POIS failed");
             });
-        };
+        }
 
         POIServices.getAllCategories().then(function (response) {
             $scope.allcategories = response.data;
@@ -102,17 +102,29 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
         $scope.poisToCategory=function(){
             var i;
             $scope.poisToShowAfterOrder = [];
+            var temp = [];
 
             for (i = 0; i < $scope.poisToShow.length; i++)
             {
-                var catOfPOI = $scope.poisToShow[i].CATEGORY;
-                if(!angular.isDefined($scope.poisToShowAfterOrder[catOfPOI]))
-                {
-                    $scope.poisToShowAfterOrder[catOfPOI]=[];
+                var catOfPOI = $scope.poisToShow[i].CATEGORY.split(' ').join('');
+                if(!angular.isDefined(temp[catOfPOI])) {
+                    temp[catOfPOI] = [];
                 }
-                $scope.poisToShowAfterOrder[catOfPOI].push($scope.poisToShow[i]);
+                temp[catOfPOI].push($scope.poisToShow[i]);
             }
-            debugger;
+
+            for (i = 0; i < $scope.allcategories.poi.length; i++) {
+                var key = $scope.allcategories.poi[i].CATEGORY.split(' ').join('');
+                if(angular.isDefined(temp[key])) {
+                    $scope.poisToShowAfterOrder.push(
+                        {
+                            name : $scope.allcategories.poi[i].CATEGORY,
+                            elements : temp[key]
+                        }
+                    );
+                }
+            }
+
         };
 
 
