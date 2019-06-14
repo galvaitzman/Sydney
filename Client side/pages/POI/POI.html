@@ -11,10 +11,17 @@
     </option>
 </select>
 
-******************************************************************************************************************************
-<table>
-    <tr ng-repeat="poi in poisToShowAfterOrder">
-        <td> {{poi.name}} </td>
-    </tr>
-</table>
+
+    <div ng-repeat="poi in poisToShowAfterOrder">
+        *****************************************
+        {{poi.name}}
+        *****************************************
+
+        <p ng-repeat="i in poi.elements">
+            POI Name: {{ i.NAME }}<br>
+            POI Rank: {{ i.RANK }}<br>
+            <img ng-src="{{ i.IMAGE }}">
+    </p>
+    </div>
+
 
