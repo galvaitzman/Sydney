@@ -32,33 +32,15 @@ angular.module("myApp").service('LoginServices',[ '$http', function ($http) {
         };
         return $http(req);
 
-
-        // return  $http.post("http://localhost:3000/USERS/Login", userToPass);
     }
 
-
-/*
-    this.set = function (t) {
-        $http.defaults.headers.common[ 'x-access-token' ] = t
-    }
-
-    this.showRandomPOI = function () {
-        return $http.get("http://localhost:3000/Users/PopularPOI");
-    }
-
-    this.FavPOI = function (token) {
-        return $http.get("http://localhost:3000/POI/GetUsersAllFavPOI?token="+token)  }
-
-    this.getUserFavOrder=function(token){
-        return $http.get("http://localhost:3000/POI/UserOrder?token="+token)
-        }
-          */
 }])
 
 .controller('loginController', function ($scope,$http,LoginServices){
     var self = this;
-    var current_user="";
+    var current_user="Guest";
     var current_token="";
+    $scope.HelloUser="Hello" + current_user;
 
     LoginServices.random3POI().then(function (response) {
         $scope.random3POIlist = response.data;

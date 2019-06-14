@@ -19,7 +19,8 @@
         <script src="pages/login/loginController.js"></script>
         <script src="pages/register/registerController.js"></script>
         <script src="pages/forgotPassword/forgotPasswordController.js"></script>
-
+        <script src="pages/home/homeController.js"></script>
+        <script src="pages/POI/POIController.js"></script>
         <!-- menu -->
         <div class="navbar">
 
@@ -29,12 +30,16 @@
 
                 <a href="#!login">Login / Register</a>
 
+                <a href="#!POI">POI</a>
+
         </div>
         <br>
         <br>
         <br>
-
+        Hello <label>{{loginController.current_user}}</label>
         <!-- This section changes as the hashbang changes -->
         <div ng-view></div>
+
+
     </body>
 </html>

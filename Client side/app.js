@@ -6,7 +6,8 @@ app.config(function($routeProvider)  {
         // homepage
         .when('/', {
             // this is a template
-            template: '<h1>This is the default route</h1>'
+            templateUrl: 'pages/home/home.html',
+            controller : 'HomeController as homeCtrl'
         })
         // about
         .when('/about', {
@@ -27,6 +28,14 @@ app.config(function($routeProvider)  {
             templateUrl: 'pages/forgotPassword/forgotPassword.html',
             controller : 'forgotPasswordController as forgotPassCtrl'
         })
+        .when('/POI', {
+            // this is a template url
+            templateUrl: 'pages/POI/POI.html',
+            controller : 'POIController as POICtrl'
+        })
+
         // other
         .otherwise({ redirectTo: '/' });
+
+    // TODO: to fix in the html Hello User
 });
