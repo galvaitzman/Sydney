@@ -1,5 +1,20 @@
-<p ng-repeat="poi in poisToShow.poi">
-    POI Name: {{ poi.NAME }}<br>
-    POI Rank: {{ poi.RANK }}<br>
-    <img ng-src="{{ poi.IMAGE }}">
-</p>
+<select type="text"
+        class="form-control"
+        name="categoryToFilter"
+        style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+        id="categoryToFilter"
+        ng-model="POICtrl.categoryToFilter"
+        ng-change ="filterByCategory()"
+        required>
+    <option  ng-repeat="cat in allcategories.poi" value="{{cat.CATEGORY}}">
+        {{cat.CATEGORY}}
+    </option>
+</select>
+
+******************************************************************************************************************************
+<table>
+    <tr ng-repeat="(key, value) in poisToShow">
+        <td> {{key}} </td>
+    </tr>
+</table>
+

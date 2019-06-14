@@ -19,6 +19,19 @@ router.get('/getAllPoints',function (req,res)
        
 });
 
+router.get('/getAllCategories',function (req,res)
+{
+    let sql ="select * from CATEGORIES";
+    DButilsAzure.execQuery(sql)
+        .then(function(ans) {
+                res.json({
+                    poi: ans
+                });
+            }
+        )
+
+});
+
 
 router.get('/getThreePopularRandomPoints',function (req,res) 
 {
@@ -96,6 +109,7 @@ router.post('/reviewPoint',function (req,res) {
 router.get('/Category',function (req,res) {
     if (!req.query.CATEGORY){
         res.send('no CATEGORY attribute');
+        return;
     }
     var Category = req.query.CATEGORY;
     let sql ="select * from POIS where CATEGORY ='"+Category+"'";
@@ -103,11 +117,14 @@ router.get('/Category',function (req,res) {
     .then(function(ans) {
         if (ans.length ==0){
             res.send(ans);
+            return;
         }
         else if (!(ans[0].CATEGORY=== Category)) {
-            res.send(Category);}
+            res.send(Category);
+            return;}
         else{  
             res.send(ans);
+            return;
         }
     })
    .catch(ans=>res.send("catch"));
