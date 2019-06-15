@@ -1,10 +1,26 @@
 
-angular.module("myApp").service('favoriteServices',[ '$http', function ($http) {
+angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,function ($http,$rootScope) {
 
-    this.Login = function (userToPass) {
+            this.getTwoLastSavedPoints = function () {
+            var req = {
+                method: 'GET',
+                url: 'http://localhost:3000/POI/getTwoLastSavedPoints',
+                headers: {
+                    'Access-Control-Allow-Origin' : '*',
+                    'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",
+                    'Access-Control-Allow-Headers' : '*',
+                    'Access-Control-Max-Age' : '*',
+                    'Content-Type': 'application/json'
+                },
+                params: {token:$rootScope.currentToken}
+            };
+            return $http(req);
+        }
+
+        this.getTwoMostPopularPoints = function () {
         var req = {
-            method: 'POST',
-            url: 'http://localhost:3000/USERS/Login',
+            method: 'GET',
+            url: 'http://localhost:3000/POI/getTwoLastSavedPoints',
             headers: {
                 'Access-Control-Allow-Origin' : '*',
                 'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",
@@ -12,61 +28,69 @@ angular.module("myApp").service('favoriteServices',[ '$http', function ($http) {
                 'Access-Control-Max-Age' : '*',
                 'Content-Type': 'application/json'
             },
-            data: userToPass
+            params: {token:$rootScope.currentToken}
         };
         return $http(req);
-        // return  $http.post("http://localhost:3000/USERS/Login", userToPass);
-    }
+            }
 
-    this.random3POI = function () {
+
+    this.getAllSavedPoints = function () {
         var req = {
             method: 'GET',
-            url: 'http://localhost:3000/POI/getThreePopularRandomPoints',
+            url: 'http://localhost:3000/POI/getTwoLastSavedPoints',
             headers: {
                 'Access-Control-Allow-Origin' : '*',
                 'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",
                 'Access-Control-Allow-Headers' : '*',
                 'Access-Control-Max-Age' : '*',
                 'Content-Type': 'application/json'
-            }
+            },
+            params: {token:$rootScope.currentToken}
         };
         return $http(req);
-
     }
+
 
 }])
 
-.controller('favoriteController', function ($scope,$http,favoriteServices){
-    var self = this;
-    var current_user="Guest";
-    var current_token="";
-    $scope.HelloUser="Hello" + current_user;
 
-    LoginServices.random3POI().then(function (response) {
-        $scope.random3POIlist = response.data;
-    }, function (response) {
-        self.Login.content = "Get 3 random POI failed";
-    });
-
-    self.Login = function () {
-        var userToPass = {USER_NAME: self.USER_NAME , PASSWORD:self.PASSWORD};
-        LoginServices.Login(userToPass).then(function (response){
-            if(response.data == "Wrong Username" || response.data == "Wrong Password") {
-                //TODO: add message filed with binding
-                //$scope.massage=response.data;
+    .controller("favoriteController",["dndLists"], function(
+        $rootScope,
+        $scope,
+        $http,
+        favoriteServices) {
+        var vm = this;
+        favoriteServices.getTwoLastSavedPoints().then(function (response) {
+            if(response.data=="no saved points for this user")
                 alert(response.data);
-                // TODO after the authentication succeeded - move to the next page
-                // TODO forgot my password
-            } else{
-                //TODO:REMOVE after moving to the new page
-                alert("success");
-                current_user=userToPass.USER_NAME;
-                current_token=response.data;
+            else {
+                $scope.twoLastSavedPoints = response.data;
             }
         }, function (response) {
-
-            self.Login.content = "Login failed";
-
+            //TODO: change the alert to informative message
+            alert( "Get Two Last Saved Points Failed");
         });
-    };
-});
+
+
+        favoriteServices.getTwoMostPopularPoints().then(function (response) {
+            if(response.data=="no Point of Interest from the given category")
+                alert(response.data);
+            else {
+                $scope.twoMostPopularPoints = response.data;
+            }
+        }, function (response) {
+            //TODO: change the alert to informative message
+            alert( "Get Two Most Popular Point Points Failed");
+        });
+
+        favoriteServices.getAllSavedPoints().then(function (response) {
+
+                $scope.allSavedPoints = response.data;
+
+        }, function (response) {
+            //TODO: change the alert to informative message
+            alert( "Get All Saved Points Failed");
+        });
+
+
+    });

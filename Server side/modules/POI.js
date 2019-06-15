@@ -139,6 +139,7 @@ router.use('/', (req, res, next) => {
         const decoded = jwt.verify(token, 'superSecret');
         req.decoded = decoded;
         currentUserName = decoded.USER_NAME;
+
         next(); //move on to the actual function
     } 
     catch (exception) {

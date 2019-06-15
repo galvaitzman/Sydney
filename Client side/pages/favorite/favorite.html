@@ -1,18 +1,35 @@
 <h1>Two Last Saved Points</h1>
 <br>
-<br>
-<br>
+<p ng-repeat="poi in twoLastSavedPoints">
+    POI Name: {{ poi.NAME }}<br />
+    POI Rank: {{ poi.RANK }}<br />
+    <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
+</p>
 
+<br>
+<br>
 
 <h1>Two Most Popular Points</h1>
 <br>
+<p ng-repeat="poi in twoMostPopularPoints">
+    POI Name: {{ poi.NAME }}<br />
+    POI Rank: {{ poi.RANK }}<br />
+    <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
 <br>
 <br>
 
 
-<h1>AllSavedPoints</h1>
+<h1>All Saved Points</h1>
 <br>
 <br>
+
+<p ng-repeat="poi in allSavedPoints">
+    POI Name: {{ poi.NAME }}<br />
+    POI Rank: {{ poi.RANK }}<br />
+    <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
+
+
+
 <br>
 
 
