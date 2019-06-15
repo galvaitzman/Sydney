@@ -176,6 +176,7 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
                    $scope.poisToShow.push(tmp[i]);
            }
             document.getElementById('categoryToFilter').value = "";
+
             $scope.poisToCategory();
         };
 

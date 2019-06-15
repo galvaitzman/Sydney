@@ -34,6 +34,13 @@ app.config(function($routeProvider)  {
             controller : 'POIController as POICtrl'
         })
 
+        .when('/favorite', {
+            // this is a template url
+            templateUrl: 'pages/favorite/favorite.html',
+            controller : 'favoriteController as favoriteCtrl'
+        })
+
+
         // other
         .otherwise({ redirectTo: '/' });
 
