@@ -180,6 +180,9 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
             $scope.poisToCategory();
         };
 
+        $scope.myFunction=function (x) {
+            x.classList.toggle("icon-heart-empty");
+        }
 
     });
 

@@ -34,6 +34,15 @@
 <br>
 
 
+<div class="flexbox">
+
+    <div class="fav-btn">
+        <span href="" class="favme dashicons dashicons-heart"></span>
+    </div>
+
+</div>
+
+
     <div ng-repeat="poi in poisToShowAfterOrder">
         *****************************************
         {{poi.name}}
@@ -44,7 +53,8 @@
             POI Rank: {{ i.RANK }}<br>
             POI Category: {{ i.CATEGORY }}<br>
             <img height="400" width="600" ng-src="{{ i.IMAGE }}">
-    </p>
+
+        </p>
     </div>
 
 
