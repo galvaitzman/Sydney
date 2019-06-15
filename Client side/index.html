@@ -1,4 +1,5 @@
 <html>
+<<<<<<< Updated upstream
   <head>
     <title>My Website</title>
     <link rel="stylesheet" type="text/css" href="resources/css/css1.css" />
@@ -47,4 +48,53 @@
     <!-- This section changes as the hashbang changes -->
     <div ng-view></div>
   </body>
+=======
+    <head>
+        <title>My Website</title>
+        <link rel="stylesheet" type="text/css" href="resources/css/css1.css">
+    </head>
+    <body ng-app="myApp">
+        <!-- load angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-animate.js"></script>
+        <script src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
+        <script src="angular/angular.js"></script>
+        <script src="angular-animate/angular-animate.js"></script>
+        <script src="md-chips-select/md-chips-select.js"></script>
+        <!-- load app -->
+        <script src="app.js"></script>
+
+        <!-- load controllers -->
+        <script src="pages/about/aboutController.js"></script>
+        <script src="pages/login/loginController.js"></script>
+        <script src="pages/register/registerController.js"></script>
+        <script src="pages/forgotPassword/forgotPasswordController.js"></script>
+        <script src="pages/home/homeController.js"></script>
+        <script src="pages/POI/POIController.js"></script>
+        <script src="pages/favorite/favoriteController.js"></script>
+
+        <!-- menu -->
+        <div class="navbar">
+
+                <a href="#!">Home</a>
+
+                <a href="#!about">About</a>
+
+                <a href="#!login">Login / Register</a>
+
+                <a href="#!POI">POI</a>
+
+                <a href="#!favorite">Favorite</a>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        Hello <label>{{loginController.current_user}}</label>
+        <!-- This section changes as the hashbang changes -->
+        <div ng-view></div>
+
+
+    </body>
+>>>>>>> Stashed changes
 </html>

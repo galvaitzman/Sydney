@@ -1,37 +1,18 @@
-
-<form class= "logIn-form" name="form" role="form">
-<div class="form-group" ng-class="{ 'has-error': form.USER_NAME.$dirty && form.USER_NAME.$error.required }">
-            <label for="USER_NAME">User Name</label>
-            <input  type="text"
-                    name="USER_NAME"
-                     style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-                    id="USER_NAME" class="form-control"
-                    ng-model="loginCtrl.USER_NAME"
-                    placeholder="Enter Username"
-                    autocomplete="off"
-                    required/>
-            <span ng-show="form.USER_NAME.$dirty && form.USER_NAME.$error.required" class="help-block">Username is required</span>
-</div>
-
-<div class="form-group" ng-class="{ 'has-error': form.PASSWORD.$dirty && form.PASSWORD.$error.required }">
-           <label for="PASSWORD" >Password</label>
-           <input  type="password"
-                   name="PASSWORD"
-                   style="width: 350px; height: 30px; margin-top: 20px;"
-                   id="PASSWORD" class="form-control"
-                   placeholder="Enter Password"
-                   autocomplete="off"
-                   ng-model="loginCtrl.PASSWORD" required/>
-           <span ng-show="form.PASSWORD.$dirty && form.PASSWORD.$error.required" class="help-block">Password is required</span>
-</div>
-
-<div class="form-actions">
-               <a  href="" class="btn btn-link" type="submit" ng-disabled="form.$invalid" class="btn btn-primary"
-                       ng-click="loginCtrl.Login()">Submit</a>
-       </div>
-    <a  href="#!forgotPassword" class="btn btn-link">Forgot your password?</a>
-    <br>
-    <a href="#!register">Register</a>
+<h1>Two Last Saved Points</h1>
+<br>
+<br>
+<br>
 
 
-</form>
+<h1>Two Most Popular Points</h1>
+<br>
+<br>
+<br>
+
+
+<h1>AllSavedPoints</h1>
+<br>
+<br>
+<br>
+
+
