@@ -12,6 +12,28 @@
 </select>
 
 
+<br>
+<br>
+
+
+<input  type="text"
+        name="wordToSearch"
+        style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+        id="wordToSearch" class="form-control"
+        ng-model="POICtrl.wordToSearch"
+        autocomplete="off"
+        required/>
+<br>
+
+<div class="form-actions">
+    <a  href="" class="btn btn-link" type="submit" ng-disabled="form.$invalid" class="btn btn-primary"
+        ng-click="POICtrl.Search()">Search</a>
+</div>
+
+<br>
+<br>
+
+
     <div ng-repeat="poi in poisToShowAfterOrder">
         *****************************************
         {{poi.name}}

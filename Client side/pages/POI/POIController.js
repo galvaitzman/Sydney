@@ -86,6 +86,8 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
 
         $scope.filterByCategory = function (){
             var catToPass=self.categoryToFilter;
+            document.getElementById('wordToSearch').value = "";
+
             if (catToPass == "" || catToPass == "Show all") {
                 $scope.poisToShow=$scope.allPois;
                 $scope.poisToCategory();
@@ -161,6 +163,20 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
                     );
                 }
             }
+        };
+
+        this.Search = function() {
+            //TODO:change the option to be empty or show all
+           var tmp =$scope.allPois;
+            $scope.poisToShow=[];
+           var i ;
+           for (i=0;i<tmp.length;i=i+1)
+           {
+               if((tmp[i].NAME).includes(self.wordToSearch))
+                   $scope.poisToShow.push(tmp[i]);
+           }
+            document.getElementById('categoryToFilter').value = "";
+            $scope.poisToCategory();
         };
 
 
