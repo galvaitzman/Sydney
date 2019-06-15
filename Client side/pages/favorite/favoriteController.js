@@ -54,12 +54,7 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
 }])
 
 
-    .controller("favoriteController",["dndLists"], function(
-        $rootScope,
-        $scope,
-        $http,
-        favoriteServices) {
-        var vm = this;
+    .controller("favoriteController", function($rootScope, $scope, $http, favoriteServices) {
         favoriteServices.getTwoLastSavedPoints().then(function (response) {
             if(response.data=="no saved points for this user")
                 alert(response.data);
