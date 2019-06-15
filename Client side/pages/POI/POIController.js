@@ -75,7 +75,8 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
 
         POIServices.getAllCategories().then(function (response) {
             $scope.allcategories = response.data;
-            $scope.allcategories.poi.push({"CATEGORY":"show all"});
+            $scope.allcategories.poi.push({"CATEGORY":"Sort by Rank"});
+            $scope.allcategories.poi.push({"CATEGORY":"Show all"});
             initPoints();
         }, function (response) {
             alert("Get all categories failed");
@@ -85,9 +86,14 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
 
         $scope.filterByCategory = function (){
             var catToPass=self.categoryToFilter;
-            if (catToPass == "" || catToPass == "show all") {
+            if (catToPass == "" || catToPass == "Show all") {
                 $scope.poisToShow=$scope.allPois;
                 $scope.poisToCategory();
+                return;
+            }
+            if (catToPass == "Sort by Rank") {
+                $scope.poisToShow=$scope.allPois;
+                $scope.poisToRank();
                 return;
             }
             var categoryToPass = {CATEGORY:catToPass};
@@ -124,7 +130,37 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
                     );
                 }
             }
+        };
 
+
+        $scope.poisToRank=function(){
+            var i;
+            $scope.poisToShowAfterOrder = [];
+            var temp = [];
+            var rankArray=[];
+
+            for (i = 0; i < $scope.poisToShow.length; i++)
+            {
+                var rankOfPOI = $scope.poisToShow[i].RANK;
+                if(!angular.isDefined(temp[rankOfPOI])) {
+                    temp[rankOfPOI] = [];
+                }
+                temp[rankOfPOI].push($scope.poisToShow[i]);
+                if(!rankArray.includes(rankOfPOI))
+                    rankArray.push(rankOfPOI);
+            }
+
+            for (i = 0; i < rankArray.length; i++) {
+                var key = rankArray[i];
+                if(angular.isDefined(temp[key])) {
+                    $scope.poisToShowAfterOrder.push(
+                        {
+                            name : key,
+                            elements : temp[key]
+                        }
+                    );
+                }
+            }
         };
 
 

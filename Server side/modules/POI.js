@@ -8,7 +8,7 @@ var POSITION = 0;
 
 router.get('/getAllPoints',function (req,res) 
     {
-        let sql ="select * from POIS order by CATEGORY";
+        let sql ="select * from POIS order by RANK desc";
         DButilsAzure.execQuery(sql)   
         .then(function(ans) {
                 res.json({
@@ -112,7 +112,7 @@ router.get('/Category',function (req,res) {
         return;
     }
     var Category = req.query.CATEGORY;
-    let sql ="select * from POIS where CATEGORY ='"+Category+"'";
+    let sql ="select * from POIS where CATEGORY ='"+Category+"'"+" ORDER BY RANK DESC";
     DButilsAzure.execQuery(sql)    
     .then(function(ans) {
         if (ans.length ==0){
