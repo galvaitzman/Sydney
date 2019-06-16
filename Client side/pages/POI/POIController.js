@@ -62,6 +62,14 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
         $scope.poisToShow=[];
         $scope.poisToShowAfterOrder=[];
 
+
+        $scope.myFunction = function(i) {
+            var favoriteClass = document.getElementById(i.POI_ID);
+            if(favoriteClass.src == "http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/256/star-full-icon.png")
+                favoriteClass.setAttribute("src","https://png.pngtree.com/svg/20170330/6a1d534b9d.svg");
+            else favoriteClass.setAttribute("src","http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/256/star-full-icon.png");
+        }
+
         function initPoints() {
             POIServices.getAllPoints().then(function (response) {
                 $scope.allPois = response.data.poi;
@@ -81,8 +89,13 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
         }, function (response) {
             alert("Get all categories failed");
         });
-
-
+/*
+        var favoriteClass = document.getElementById(43);
+        if(favoriteClass.src == "http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/256/star-full-icon.png")
+            favoriteClass.setAttribute("src","https://png.pngtree.com/svg/20170330/6a1d534b9d.svg");
+        else favoriteClass.setAttribute("src","http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/256/star-full-icon.png");
+    }
+*/
 
         $scope.filterByCategory = function (){
             var catToPass=self.categoryToFilter;
@@ -180,9 +193,31 @@ angular.module("myApp").service('POIServices',[ '$http', function ($http) {
             $scope.poisToCategory();
         };
 
-        $scope.myFunction=function (x) {
-            x.classList.toggle("icon-heart-empty");
+
+// ------------------------favorite list----------------------------------
+
+        $scope.getFvoritesFromLocalStorage=function(){
+            var favList = localStorageModel.getLocalStorage("favorite_list")
+            return favList;
         }
 
+        $scope.ifFavorite = function (id)
+        {
+            if($scope.FAVLIST==undefined)
+            {
+                $scope.FAVLIST=[]
+                return false
+            }
+            for(var i=0;i< $scope.FAVLIST.length;i++)
+            {
+                if($scope.FAVLIST[i].POI_ID==id)
+                    return true
+            }
+            return false
+        }
+
+        $scope.saveFavAtLocalStorage= function (fav) {
+            localStorageModel.updateLocalStorage("favorites",fav)
+        }
     });
 
