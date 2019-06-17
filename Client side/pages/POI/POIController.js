@@ -101,14 +101,16 @@ angular.module("myApp").service('POIServices',[ '$http','$rootScope', function (
         $scope.allSavedPoints=[];
 
 
-        POIServices.getAllSavedPoints().then(function (response) {
-            $scope.allSavedPoints = response.data;
+        // todo : to change it to boolean is guest
+        if($rootScope.currentUser!="Guest") {
+            POIServices.getAllSavedPoints().then(function (response) {
+                $scope.allSavedPoints = response.data;
 
-        }, function (response) {
-            //TODO: change the alert to informative message
-            alert( "Get All Saved Points Failed");
-        });
-
+            }, function (response) {
+                //TODO: change the alert to informative message
+                alert("Get All Saved Points Failed");
+            });
+        }
 
 
         $scope.myFunction = function(i) {
