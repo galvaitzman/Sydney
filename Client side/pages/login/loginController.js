@@ -49,6 +49,13 @@ angular
     $scope.HelloUser = "Hello" + current_user; //DONE by inbar
     $rootScope.currentUser = current_user; //DONE by inbar
     $rootScope.currentToken = current_token;
+    $rootScope.favCounter=0;
+
+      var existingFavList = JSON.parse(localStorage.getItem("favoriteList"));
+      if(existingFavList != null)
+          $rootScope.favCounter=existingFavList.length;
+
+
     LoginServices.random3POI().then(
       function(response) {
         $scope.random3POIlist = response.data;

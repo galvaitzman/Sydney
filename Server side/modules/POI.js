@@ -294,7 +294,8 @@ router.post('/saveFavoritePoint', function (req, res) {
 
 router.delete('/removeFavoritePoint', function (req, res) {
         if (!req.body.POI_ID){
-            res.send("");
+            res.send("no POI_ID attribute");
+            return;
         }
 		var POI_ID=req.body.POI_ID;
         var sql ="DELETE FROM  FAVOURITE_POINTS WHERE POI_ID='"+POI_ID+"' AND USER_NAME = '"+currentUserName+"'";  

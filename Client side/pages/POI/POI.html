@@ -45,7 +45,7 @@
 </div>
 
 
-    <div ng-repeat="poi in poisToShowAfterOrder">
+    <div align="center" ng-repeat="poi in poisToShowAfterOrder">
         *****************************************
         {{poi.name}}
         *****************************************
@@ -55,7 +55,8 @@
             POI Rank: {{ i.RANK }}<br>
             POI Category: {{ i.CATEGORY }}<br>
             <img height="400" width="600" ng-src="{{ i.IMAGE }}">
-            <img id="{{i.POI_ID}}" ng-click="myFunction(i)" class="favorite" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/256/star-full-icon.png" height="50"  width="50"/></img>
+            <img id="{{i.POI_ID}}" ng-src="{{initFuncToFillStarButton(i)}}" ng-click="myFunction(i)" class="favorite" height="50"  width="50"/></img>
+
         </p>
     </div>
 

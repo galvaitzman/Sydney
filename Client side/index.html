@@ -25,17 +25,19 @@
 
     <!-- menu -->
     <div class="navbar">
-      <a href="#!">Home</a>
+      <a href="#!"><p>Home</p></a>
 
-      <a href="#!about">About</a>
+      <a href="#!about"><p>About</p></a>
 
-      <a href="#!login">Login / Register</a>
+      <a href="#!login"><p>Login / Register</p></a>
 
-      <a href="#!POI">POI</a>
+      <a href="#!POI"><p>POI</p></a>
 
-      <a href="#!favorite">Favorite</a>
+      <a href="#!favorite"><div align="center">Favorite<br> <img style="width: 20px; height: 20px;" src="https://png.pngtree.com/svg/20161202/e7f5a90a9e.svg">  {{ favCounter }}</div></a>
 
-      <a style="float:right" ng-controller="loginController">Hello {{ currentUser }}
+      <a style="float:right" ng-controller="loginController">
+        <p style="float:right" ng-controller="loginController">Hello {{ currentUser }}
+        </p>
       </a>
     </div>
     <br />
