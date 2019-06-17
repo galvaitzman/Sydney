@@ -237,22 +237,24 @@ router.post('/saveFavoritePointsToServer',function (req,res) { //position is +1 
             if (ans.length != 0){
                 POSITION = ans[0].POSITION;
             }
-            for(var i=0; i<POIS_Array.length; i++){
+            for(var i=0; i<POIS_Array.length; i=i+1){
                 POSITION = POSITION + 1;
                 if (!req.body.POIS_Array[i].POI_ID){
                     res.send("no POI_ID attribute in the " + i + " index");
+                    return;
                 }
                 POI_ID = POIS_Array[i].POI_ID;
                 var sql ="insert into FAVOURITE_POINTS (USER_NAME,POI_ID,POSITION) values('"+currentUserName+"','"+POI_ID+"',"+POSITION+")";
                 DButilsAzure.execQuery(sql) 
                 .then(function(result){
-                    
+
                 }).catch(function(err){
                     res.send(err);
+                    return;
                 })
             }   
         }
-       ).catch(function(err){
+       ).then(ans=> res.send("TRUE")).catch(function(err){
         res.send("," + POI_ID + ",");
     })
 	

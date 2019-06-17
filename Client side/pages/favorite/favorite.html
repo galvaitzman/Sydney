@@ -1,6 +1,29 @@
+<center>
+    <br>
+    <br>
+    *****************************************************************************************
+    <h1>Wish List</h1> <img style="width: 40px; height: 40px;" src="https://png.pngtree.com/svg/20161202/e7f5a90a9e.svg"><br>
+    *****************************************************************************************
+    <br>
+    <p ng-repeat="poi in existingFavList">
+
+        POI Name: {{ poi.NAME }}<br />
+        POI Rank: {{ poi.RANK }}<br />
+        <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
+    </p>
+
+    <br>
+    <a  href="" class="btn btn-link" type="submit" class="btn btn-primary"
+        ng-click="favoriteCtrl.saveFavoritePointsToServer()">Save new points to favorites</a>
+    <br>
+    <br>
+    <br>
+*****************************************************************************************
 <h1>Two Last Saved Points</h1>
+*****************************************************************************************
 <br>
 <p ng-repeat="poi in twoLastSavedPoints">
+
     POI Name: {{ poi.NAME }}<br />
     POI Rank: {{ poi.RANK }}<br />
     <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
@@ -8,18 +31,22 @@
 
 <br>
 <br>
-
+*****************************************************************************************
 <h1>Two Most Popular Points</h1>
+*****************************************************************************************
 <br>
 <p ng-repeat="poi in twoMostPopularPoints">
     POI Name: {{ poi.NAME }}<br />
     POI Rank: {{ poi.RANK }}<br />
     <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
+</p>
 <br>
 <br>
 
-
+*****************************************************************************************
 <h1>All Saved Points</h1>
+    <img style="width: 40px; height: 40px;" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/256/star-full-icon.png"><br>
+*****************************************************************************************
 <br>
 <br>
 
@@ -28,8 +55,6 @@
     POI Rank: {{ poi.RANK }}<br />
     <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
 
-
-
 <br>
 
-
+</center>

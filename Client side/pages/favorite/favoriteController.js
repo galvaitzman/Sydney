@@ -37,7 +37,7 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
     this.getAllSavedPoints = function () {
         var req = {
             method: 'GET',
-            url: 'http://localhost:3000/POI/getTwoLastSavedPoints',
+            url: 'http://localhost:3000/POI/getAllSavedPoints',
             headers: {
                 'Access-Control-Allow-Origin' : '*',
                 'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",
@@ -50,11 +50,32 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
         return $http(req);
     }
 
+    this.saveFavoritePointsToServer1 = function (existingFavoriteList) {
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:3000/POI/saveFavoritePointsToServer',
+            headers: {
+                'Access-Control-Allow-Origin' : '*',
+                'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",
+                'Access-Control-Allow-Headers' : '*',
+                'Access-Control-Max-Age' : '*',
+                'Content-Type': 'application/json'
+            },
+            data: {POIS_Array:existingFavoriteList},
+            params: {token:$rootScope.currentToken}
+        };
+        return $http(req);
+    }
+
 
 }])
 
 
     .controller("favoriteController", function($rootScope, $scope, $http, favoriteServices) {
+        var self=this;
+        $scope.existingFavList = JSON.parse(localStorage.getItem("favoriteList"));
+        if($scope.existingFavList == null) $scope.existingFavList = [];
+
         favoriteServices.getTwoLastSavedPoints().then(function (response) {
             if(response.data=="no saved points for this user")
                 alert(response.data);
@@ -86,6 +107,30 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
             //TODO: change the alert to informative message
             alert( "Get All Saved Points Failed");
         });
+
+        self.saveFavoritePointsToServer = function () {
+
+            favoriteServices.saveFavoritePointsToServer1($scope.existingFavList).then(function (response){
+                localStorage.clear();
+                $rootScope.favCounter=0;
+
+                favoriteServices.getAllSavedPoints().then(function (response) {
+
+                    $scope.allSavedPoints = response.data;
+
+                }, function (response) {
+                    //TODO: change the alert to informative message
+                    alert( "Get All Saved Points Failed");
+                });
+
+                console.log(response);
+            }, function (response) {
+                console.log(response);
+                //TODO : change the alert
+                alert("Save Favorite Points To Server Failed");
+            });
+        };
+
 
 
     });
