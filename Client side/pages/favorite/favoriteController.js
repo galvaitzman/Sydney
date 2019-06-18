@@ -76,38 +76,47 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
         $scope.existingFavList = JSON.parse(localStorage.getItem("favoriteList"));
         if($scope.existingFavList == null) $scope.existingFavList = [];
 
-        favoriteServices.getTwoLastSavedPoints().then(function (response) {
-            if(response.data=="no saved points for this user")
-                alert(response.data);
-            else {
-                $scope.twoLastSavedPoints = response.data;
-            }
-        }, function (response) {
-            //TODO: change the alert to informative message
-            alert( "Get Two Last Saved Points Failed");
-        });
+        getAllSavedPoints();
+        getTwoLastSavedPoints();
+        getTwoMostPopularPoints();
+
+        function getTwoLastSavedPoints() {
+            favoriteServices.getTwoLastSavedPoints().then(function (response) {
+                if (response.data == "no saved points for this user")
+                    alert(response.data);
+                else {
+                    $scope.twoLastSavedPoints = response.data;
+                }
+            }, function (response) {
+                //TODO: change the alert to informative message
+                alert("Get Two Last Saved Points Failed");
+            });
+        };
 
 
+        function getTwoMostPopularPoints() {
+            favoriteServices.getTwoMostPopularPoints().then(function (response) {
+                if (response.data == "no Point of Interest from the given category")
+                    alert(response.data);
+                else {
+                    $scope.twoMostPopularPoints = response.data;
+                }
+            }, function (response) {
+                //TODO: change the alert to informative message
+                alert("Get Two Most Popular Point Points Failed");
+            });
+        }
 
-        favoriteServices.getTwoMostPopularPoints().then(function (response) {
-            if(response.data=="no Point of Interest from the given category")
-                alert(response.data);
-            else {
-                $scope.twoMostPopularPoints = response.data;
-            }
-        }, function (response) {
-            //TODO: change the alert to informative message
-            alert( "Get Two Most Popular Point Points Failed");
-        });
-
-        favoriteServices.getAllSavedPoints().then(function (response) {
+        function getAllSavedPoints() {
+            favoriteServices.getAllSavedPoints().then(function (response) {
 
                 $scope.allSavedPoints = response.data;
 
-        }, function (response) {
-            //TODO: change the alert to informative message
-            alert( "Get All Saved Points Failed");
-        });
+            }, function (response) {
+                //TODO: change the alert to informative message
+                alert("Get All Saved Points Failed");
+            });
+        }
 
         self.saveFavoritePointsToServer = function () {
 
@@ -117,14 +126,9 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
                 $scope.existingFavList=[];
 
 
-                favoriteServices.getAllSavedPoints().then(function (response) {
-
-                    $scope.allSavedPoints = response.data;
-
-                }, function (response) {
-                    //TODO: change the alert to informative message
-                    alert( "Get All Saved Points Failed");
-                });
+                getAllSavedPoints();
+                getTwoMostPopularPoints();
+                getTwoLastSavedPoints();
 
                 console.log(response);
             }, function (response) {
