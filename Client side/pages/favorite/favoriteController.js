@@ -88,6 +88,7 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
         });
 
 
+
         favoriteServices.getTwoMostPopularPoints().then(function (response) {
             if(response.data=="no Point of Interest from the given category")
                 alert(response.data);
@@ -113,6 +114,8 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
             favoriteServices.saveFavoritePointsToServer1($scope.existingFavList).then(function (response){
                 localStorage.clear();
                 $rootScope.favCounter=0;
+                $scope.existingFavList=[];
+
 
                 favoriteServices.getAllSavedPoints().then(function (response) {
 

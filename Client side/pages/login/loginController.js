@@ -41,7 +41,8 @@ angular
     $scope,
     $http,
     LoginServices,
-    $rootScope
+    $rootScope,
+
   ) {
     var self = this;
     var current_user = "Guest";
@@ -50,6 +51,9 @@ angular
     $rootScope.currentUser = current_user; //DONE by inbar
     $rootScope.currentToken = current_token;
     $rootScope.favCounter=0;
+
+     /* localStorage.clear();
+      console.log(localStorage);*/
 
       var existingFavList = JSON.parse(localStorage.getItem("favoriteList"));
       if(existingFavList != null)
