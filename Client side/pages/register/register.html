@@ -15,11 +15,13 @@
                             ng-minlength="3"
 
                             required/>
+                    
                     <span ng-show="form.USER_NAME.$error.maxlength">* Must contain a maximum of 8 characters</span>
                     <span ng-show="form.USER_NAME.$error.minlength">* Must contain at least 3 characters</span>
                     <span ng-show="form.USER_NAME.$error.pattern">* Must contain only letters</span>
                     <span ng-show="form.USER_NAME.$dirty && form.USER_NAME.$error.required" class="help-block">User name is required</span>
                     <p>{{userNameError}}</p>
+                   
         </div>
 
         <div class="form-group" ng-class="{ 'has-error': form.FirstName.$dirty && form.FirstName.$error.required }" >
@@ -113,55 +115,89 @@
 -->
 
 
-    <div class="form-group" ng-class="{ 'has-error': form.ques1.$dirty && form.ques1.$error.required }" ng-init = "myFunc()" >
-        <select type="text"
-                class="form-control"
-                name="ques1"
-                style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-                id="ques1"
-                ng-model="registerCtrl.ques1" required>
-            <option ng-repeat="ques in questions" value="{{ques.QUESTION}}">
-                {{ques.QUESTION}}
-            </option>
-        </select>
-        <br>
-        <input type="text"
-               name="ans1"
-               placeholder="Enter your answer to the first question"
-               style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-               id="ans1" class="form-control"
-               ng-model="registerCtrl.ans1" required/>
-        <span ng-show="form.ques1.$dirty && form.ques1.$error.required" class="help-block">question 1 is required</span>
-    </div>
+<div>choose first question:</div>
+<div class="form-group" ng-class="{ 'has-error': form.ques1.$dirty && form.ques1.$error.required }" ng-init = "myFunc()" >
+    <select type="text"
+            
+            class="form-control"
+            name="ques1"
+            style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+            id="ques1"
+            ng-model="registerCtrl.question1List"
+            ng-options="col.QUESTION for col in questions|excludeUsed:registerCtrl.question2List"
+            required>
+    </select>
+    <br>
+    <input type="text"
+           name="ans1"
+           placeholder="Enter your answer to the first question"
+           style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+           id="ans1" class="form-control"
+           ng-model="registerCtrl.ans1" required/>
+    <span ng-show="form.ques1.$dirty && form.ques1.$error.required" class="help-block">question 1 is required</span>
+</div>
+
+<div>choose second question:</div>
+<div class="form-group" ng-class="{ 'has-error': form.ques2.$dirty && form.ques2.$error.required }" ng-init = "myFunc()" >
+    <select type="text"
+            
+            class="form-control"
+            name="ques2"
+            placeholder="Choose second question to answer"
+            style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+            id="ques2"
+            ng-model="registerCtrl.question2List" 
+            ng-options="col.QUESTION for col in questions|excludeUsed:registerCtrl.question1List"
+            required>
+    </select>
+    <br>
+    <input type="text"
+           name="ans2"
+           placeholder="Enter your answer to the first question"
+           style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+           id="ans2" class="form-control"
+           ng-model="registerCtrl.ans2" required/>
+    <span ng-show="form.ques2.$dirty && form.ques2.$error.required" class="help-block">question 2 is required</span>
+</div>
+
+<div class="form-group" ng-class="{ 'has-error': form.category1.$dirty && form.category1.$error.required }" ng-init = "myFunc()" >
+    <select type="text"
+            class="form-control"
+            name="category1"
+            style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+            id="category1"
+            ng-model="registerCtrl.categories1List"
+            ng-options="col.CATEGORY for col in categories|excludeUsed:registerCtrl.categories2List"
+            required>
+    </select>
+</div>
 
 
-    <div class="form-group" ng-class="{ 'has-error': form.ques2.$dirty && form.ques2.$error.required }" ng-init = "myFunc()" >
-        <select type="text"
-                class="form-control"
-                name="ques2"
-                style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-                id="ques2"
-                ng-model="registerCtrl.ques2" required>
-            <option ng-repeat="ques in questions" value="{{ques.QUESTION}}">
-                {{ques.QUESTION}}
-            </option>
-        </select>
-        <br>
-        <input type="text"
-               name="ans2"
-               placeholder="Enter your answer to the first question"
-               style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-               id="ans2" class="form-control"
-               ng-model="registerCtrl.ans2" required/>
-        <span ng-show="form.ques2.$dirty && form.ques2.$error.required" class="help-block">question 2 is required</span>
-    </div>
+<div class="form-group" ng-class="{ 'has-error': form.category2.$dirty && form.category2.$error.required }" ng-init = "myFunc()" >
+    <select type="text"
+            class="form-control"
+            name="category2"
+            style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+            id="category2"
+            ng-model="registerCtrl.categories2List" 
+            ng-options="col.CATEGORY for col in categories|excludeUsed:registerCtrl.categories1List"
+            required>
+    </select>
+</div>
+
+
+   
+
+
+    
+
 
 
 
         <div class="form-actions">
-                       <a  href="" class="btn btn-link" type="submit" ng-disabled="form.$invalid || registerCtrl.dataLoading" class="btn btn-primary"
+                       <button class="btn btn-link" type="submit" ng-disabled="form.$invalid" class="btn btn-primary"
                                ng-click="registerCtrl.Register()">Register
-                       </a>
+                       </button>
         </div>
 
 

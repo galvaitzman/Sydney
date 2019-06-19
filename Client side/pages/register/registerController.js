@@ -1,4 +1,6 @@
 
+
+
 angular.module("myApp").service('registerServices',['$http', function ($http) {
 
     this.Register = function (userToPass) {
@@ -17,6 +19,22 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
 
         return $http(req);
     }
+
+    this.getAllCategories = function () {
+        var req = {
+            method: 'GET',
+            url: "http://localhost:3000/POI/getAllCategories",
+            headers: {
+                'Access-Control-Allow-Origin' : '*',
+                'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",
+                'Access-Control-Allow-Headers' : '*',
+                'Access-Control-Max-Age' : '*',
+                'Content-Type': 'application/json'
+            }
+        };
+        return $http(req);
+    }
+   
 
 /*
     $http.get("http://localhost:3000/USERS/getAllQuestions").then(function (data) {
@@ -62,6 +80,13 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
 .controller('registerController', function ($scope,$http,registerServices){
 
     var self = this;
+    self.question1List = '';
+    self.question2List = '';
+    self.categories1List = '';
+    self.categories2List = '';
+    $scope.questions = [];
+    $scope.categories = [];
+
 // TODO: move http function to Service
     $http({
         method: 'GET',
@@ -80,15 +105,25 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
     });
 
 
+    self.getAllCategories = function () {
+        registerServices.getAllCategories().then(function (response){
+            $scope.categories = response.data.poi;
+        }, function (response) {
+            alert("Get categories failed");
+        });
+    };
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                self.countriesFunc(this);
-            }
-        };
-        xhttp.open("GET", "pages/register/countries.xml", true);
-        xhttp.send();
+    
+    self.getAllCategories();
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+            self.countriesFunc(this);
+        }
+    };
+    xhttp.open("GET", "pages/register/countries.xml", true);
+    xhttp.send();
 
     self.countriesFunc = function (xmlInput) {
         var temp = [];
@@ -124,22 +159,20 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
 
     // TODO: register function
     self.Register = function () {
-
         var quesAns1 =
             {
-
-                QUESTION_ID: self.ques1 ,
+                QUESTION_ID: document.getElementById("ques1").options[document.getElementById("ques1").selectedIndex].text,
                 ANSWER : self.ans1
             };
 
         var quesAns2 =
             {
 
-                QUESTION_ID: self.ques2 ,
+                QUESTION_ID: document.getElementById("ques2").options[document.getElementById("ques2").selectedIndex].text ,
                 ANSWER : self.ans2
             };
-
-
+        var category1 = document.getElementById("category1").options[document.getElementById("category1").selectedIndex].text;
+        var category2 = document.getElementById("category2").options[document.getElementById("category2").selectedIndex].text;
         var userToPass =
             {   USER_NAME: self.USER_NAME ,
                 FirstName: self.FirstName,
@@ -150,7 +183,7 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
                 PASSWORD: self.PASSWORD,
                 QuestionsAnswers: [quesAns1,quesAns2],
                 //TODO: change favoriteCategories to value from multiple selections
-                favoriteCategories: ["Beaches","Food & Drinks"]
+                favoriteCategories: [category1,category2]
             };
 
 
@@ -170,4 +203,18 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
 
         });
     };
+
+   
+})
+
+.filter('excludeUsed', function() {
+    var filter = function(items, excludeVal1, excludeVal2) {
+        var checkItem = function(item) {
+            return (item != excludeVal1) && (item != excludeVal2);
+        };
+
+        return items.filter(checkItem);
+    };
+
+    return filter;
 });

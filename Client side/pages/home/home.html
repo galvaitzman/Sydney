@@ -1,7 +1,35 @@
 <center>
-<p align="center" ng-repeat="poi in random3POIlist">
+<p align="center" ng-repeat="poi in random3POIlist" ng-show="isGuest">
   POI Name: {{ poi.NAME }}<br />
   POI Rank: {{ poi.RANK }}<br />
   <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
 </p>
 </center>
+<h1>Two Last Saved Points</h1>
+*****************************************************************************************
+<br>
+
+<p ng-repeat="poi in twoLastSavedPoints" ng-show="!isGuest" >
+
+    POI Name: {{ poi.NAME }}<br />
+    POI Rank: {{ poi.RANK }}<br />
+    <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
+    
+</p>
+
+<br>
+<br>
+*****************************************************************************************
+<h1>Two Most Popular Points</h1>
+*****************************************************************************************
+<br>
+
+<p ng-repeat="poi in twoMostPopularPoints">
+    POI Name: {{ poi.NAME }}<br />
+    POI Rank: {{ poi.RANK }}<br />
+    <img height="400" width="600" ng-src="{{ poi.IMAGE }}" />
+</p>
+</p>
+<br>
+
+

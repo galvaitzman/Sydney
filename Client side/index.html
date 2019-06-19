@@ -29,7 +29,8 @@
 
       <a href="#!about"><p>About</p></a>
 
-      <a href="#!login"><p>Login / Register</p></a>
+      <a href="#!login" ng-show="isGuest"><p>Login / Register</p></a>
+      <a href="#!login" ng-show="!isGuest"><p>Log Out</p></a>
 
       <a href="#!POI"><p>POI</p></a>
 
