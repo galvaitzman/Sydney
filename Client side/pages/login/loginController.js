@@ -42,6 +42,7 @@ angular
     $http,
     LoginServices,
     $rootScope,
+    $window
 
   ) {
     var self = this;
@@ -51,6 +52,9 @@ angular
     $rootScope.currentUser = current_user; //DONE by inbar
     $rootScope.currentToken = current_token;
     $rootScope.favCounter=0;
+    $rootScope.isGuest=true;
+
+    
 
      /* localStorage.clear();
       console.log(localStorage);*/
@@ -88,8 +92,10 @@ angular
             current_user = userToPass.USER_NAME;
             current_token = response.data;
             $rootScope.currentUser = current_user; //DONE by inbar
-            $rootScope.currentToken = current_token; // DONE by inbar
+            $rootScope.currentToken = current_token;// DONE by inbar
+            $rootScope.isGuest=false;
             alert("Hello " + $rootScope.currentUser); //DONE by inbar
+            $window.location.href = "#!";
           }
         },
         function(response) {
