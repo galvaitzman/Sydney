@@ -2,6 +2,9 @@
   <head>
     <title>My Website</title>
     <link rel="stylesheet" type="text/css" href="resources/css/css1.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body ng-app="myApp">
     <!-- load angular -->
@@ -11,6 +14,10 @@
     <script src="angular/angular.js"></script>
     <script src="angular-animate/angular-animate.js"></script>
     <script src="md-chips-select/md-chips-select.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <!-- load app -->
     <script src="app.js"></script>
 
@@ -34,16 +41,19 @@
 
       <a href="#!POI"><p>POI</p></a>
 
-      <a href="#!favorite"><div align="center">Favorite<br> <img style="width: 20px; height: 20px;" src="https://png.pngtree.com/svg/20161202/e7f5a90a9e.svg">  {{ favCounter }}</div></a>
+      <a href="#!favorite" ng-show="!isGuest">
+        <p>
+          Favorite
+          <img style="width: 20px; height: 20px;" src="https://png.pngtree.com/svg/20161202/e7f5a90a9e.svg">
+          {{ favCounter }}
+        </p>
+      </a>
 
       <a style="float:right" ng-controller="loginController">
         <p style="float:right" ng-controller="loginController">Hello {{ currentUser }}
         </p>
       </a>
     </div>
-    <br />
-    <br />
-    <br />
 
     <!-- This section changes as the hashbang changes -->
     <div ng-view></div>

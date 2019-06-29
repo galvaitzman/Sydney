@@ -1,5 +1,67 @@
 <center>
-<br><br>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel"><b>{{alert_name}}</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- <div class = "single-img" ng-repeat="x in records"> -->
+                    <b>Category</b> : {{alert_category}}
+                    <input class="star" type="checkbox" title="Favorite" ng-show=$root.userLoggedIn ng-click="updateFavoritesPoints(POINTid)" ng-checked="fav">
+                    <br>
+                    <b>Rank</b> : {{ alert_RANK }}
+                    <br>
+                    <b>Number of views</b> : {{alert_NOV}}
+                    <br>
+                    <b>Number of review</b> : {{alert_NOR}}
+                    <br>
+                    <b>Description</b> : {{alert_desc}}
+                    <br>
+                    <br>
+                    <h4><b>Last 2 reviews</b></h4>
+                    <p align="center" ng-repeat="poi in twoLastReview">
+                        <b>Review</b> : {{ poi.REVIEW }}<br>
+                        <b>Date</b> : {{poi.DATE}}
+                        <br>
+                        <br>
+                    </p>
+                    {{alert_reviews}}
+                    <br>
+                    <br>
+                    <img height="300" width="450" ng-src={{alert_image}}>
+                    <br>
+                    <br>
+
+
+                    <input  type="text"
+                            name="rank_input"
+                            style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                            id="rank_input"
+                            placeholder="Enter rank"
+                            ng-model="homeCtrl.rank_input"/>
+                    <input  type="text"
+                            name="review_input"
+                            style="width: 300px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+                            id="review_input"
+                            placeholder="Enter review"
+                            ng-model="homeCtrl.review_input"/>
+                    <br>
+
+                    <p style="color:red">{{alert_addReview}}</p>
+
+
+                    <button ng-click="homeCtrl.AddReview()" type="button" class="btn btn-primary">Add review</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
 <select type="text"
         class="form-control"
         name="categoryToFilter"
@@ -26,7 +88,7 @@
 <br>
 
 <div class="form-actions">
-    <a  href="" class="btn btn-link" type="submit" ng-disabled="form.$invalid" class="btn btn-primary"
+    <a  href="" class="btn btn-primary" type="submit" ng-disabled="form.$invalid" class="btn btn-primary"
         ng-click="POICtrl.Search()">Search</a>
 </div>
 
@@ -52,8 +114,9 @@
             POI Name: {{ i.NAME }}<br>
             POI Rank: {{ i.RANK }}<br>
             POI Category: {{ i.CATEGORY }}<br>
-            <img height="400" width="600" ng-src="{{ i.IMAGE }}">
-            <img id="{{i.POI_ID}}" ng-src="{{initFuncToFillStarButton(i)}}" ng-click="myFunction(i)" class="favorite" height="50"  width="50"/></img>
+            <img data-toggle="modal" data-target="#exampleModal" ng-click="POICtrl.showAllInformation(i)" height="400" width="600" ng-src="{{ i.IMAGE }}" />
+
+            <img ng-show="!isGuest" id="{{i.POI_ID}}" ng-src="{{initFuncToFillStarButton(i)}}" ng-click="myFunction(i)" class="favorite" height="50"  width="50"/></img>
 
         </p>
     </div>
