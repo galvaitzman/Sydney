@@ -396,6 +396,8 @@ angular.module("myApp").service('POIServices',[ '$http','$rootScope', function (
             $scope.alert_reviews="";
             $scope.alert_addReview="";
             $scope.twoLastReview=[];
+            self.review_input="";
+            self.rank_input="";
 
             POIServices.getTwoLastReviewsOnPoint(poi.POI_ID).then(
                 function(response) {

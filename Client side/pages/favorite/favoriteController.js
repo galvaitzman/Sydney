@@ -37,6 +37,40 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
         return $http(req);
     }
 
+    this.getTwoLastReviewsOnPoint = function (poi_id) {
+        var req = {
+            method: 'GET',
+            url: 'http://localhost:3000/POI/getTwoLastReviewsOnPoint',
+            headers: {
+                'Access-Control-Allow-Origin' : '*',
+                'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",
+                'Access-Control-Allow-Headers' : '*',
+                'Access-Control-Max-Age' : '*',
+                'Content-Type': 'application/json'
+            },
+            params: {POI_ID : poi_id}
+        };
+        return $http(req);
+    }
+
+
+    this.reviewPoint = function (review) {
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:3000/POI/reviewPoint',
+            headers: {
+                'Access-Control-Allow-Origin' : '*',
+                'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",
+                'Access-Control-Allow-Headers' : '*',
+                'Access-Control-Max-Age' : '*',
+                'Content-Type': 'application/json'
+            },
+            data: review
+        };
+        return $http(req);
+    }
+
+
 
 }])
 
@@ -79,6 +113,76 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
                 alert("Save Favorite Points To Server Failed");
             });
         };
+
+
+        self.AddReview = function() {
+            $scope.alert_addReview="";
+
+            if(self.review_input == "" || self.rank_input == "")
+            {
+                $scope.alert_addReview="Please fill both fields";
+            }
+            else if (self.rank_input!= "1" && self.rank_input!= "2" && self.rank_input!= "3" && self.rank_input!= "4" && self.rank_input!= "5")
+            {
+                $scope.alert_addReview="Rank need to be between 1-5";
+            }
+            else {
+                var review = {POI_ID: $scope.alert_poiID, REVIEW: self.review_input, rank: self.rank_input};
+                favoriteServices.reviewPoint(review).then(
+                    function (response) {
+                        if (response.data == "one of the requierd attribute was not provided") {
+                            alert(response.data);
+                        } else {
+                            alert("Review saved successfully");
+                        }
+                    },
+                    function (response) {
+                        self.Login.content = "Add review failed";
+                    }
+                );
+            }
+
+
+        }
+
+
+
+        self.showAllInformation = function(poi) {
+
+            $scope.alert_poiID = poi.POI_ID;
+            $scope.alert_name= poi.NAME;
+            $scope.alert_category = poi.CATEGORY;
+            $scope.alert_RANK = poi.RANK;
+            $scope.alert_NOV = poi.NOV;
+            $scope.alert_desc = poi.DESCREPTION;
+            $scope.alert_NOR = poi.NOR;
+            $scope.alert_image = poi.IMAGE;
+            $scope.alert_reviews="";
+            $scope.alert_addReview="";
+            $scope.twoLastReview=[];
+            self.review_input="";
+            self.rank_input="";
+
+            favoriteServices.getTwoLastReviewsOnPoint(poi.POI_ID).then(
+                function(response) {
+                    if (response.data == "no such attribute POI_ID in the given query") {
+                        //TODO: add message filed with binding
+                        //$scope.massage=response.data;
+                        alert("Get two last review failed");
+                    }
+                    if(response.data == "no reviews for this POI")
+                        $scope.alert_reviews = "No reviews for this POI";
+                    else {
+                        $scope.twoLastReview = response.data;
+                    }
+                },
+                function(response) {
+                    alert("Get two last review failed");
+                }
+            );
+
+        };
+
 
 
 

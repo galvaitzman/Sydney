@@ -174,6 +174,8 @@ angular
           $scope.alert_reviews="";
           $scope.alert_addReview="";
           $scope.twoLastReview=[];
+          self.review_input="";
+          self.rank_input="";
 
           HomeServices.getTwoLastReviewsOnPoint(poi.POI_ID).then(
               function(response) {
