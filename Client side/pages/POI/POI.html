@@ -42,19 +42,19 @@
                             style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
                             id="rank_input"
                             placeholder="Enter rank"
-                            ng-model="homeCtrl.rank_input"/>
+                            ng-model="POICtrl.rank_input"/>
                     <input  type="text"
                             name="review_input"
                             style="width: 300px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
                             id="review_input"
                             placeholder="Enter review"
-                            ng-model="homeCtrl.review_input"/>
+                            ng-model="POICtrl.review_input"/>
                     <br>
 
                     <p style="color:red">{{alert_addReview}}</p>
 
 
-                    <button ng-click="homeCtrl.AddReview()" type="button" class="btn btn-primary">Add review</button>
+                    <button ng-click="POICtrl.AddReview()" type="button" class="btn btn-primary">Add review</button>
 
                 </div>
             </div>

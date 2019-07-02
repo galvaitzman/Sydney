@@ -42,19 +42,19 @@
                         style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
                         id="rank_input"
                         placeholder="Enter rank"
-                        ng-model="homeCtrl.rank_input"/>
+                        ng-model="favoriteCtrl.rank_input"/>
                 <input  type="text"
                         name="review_input"
                         style="width: 300px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
                         id="review_input"
                         placeholder="Enter review"
-                        ng-model="homeCtrl.review_input"/>
+                        ng-model="favoriteCtrl.review_input"/>
                 <br>
 
                 <p style="color:red">{{alert_addReview}}</p>
 
 
-                <button ng-click="homeCtrl.AddReview()" type="button" class="btn btn-primary">Add review</button>
+                <button ng-click="favoriteCtrl.AddReview()" type="button" class="btn btn-primary">Add review</button>
 
             </div>
         </div>
@@ -93,18 +93,18 @@
     POI Rank: {{ poi.RANK }}<br />
     <img data-toggle="modal" data-target="#exampleModal" ng-click="favoriteCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
 
-<br>
+    <select type="text"
+            class="form-control"
+            name="category"
+            style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+            id="category1"
+            ng-model="favoriteCtrl.orderList"
+            ng-options=" for index in orderList|excludeUsed:favoriteCtrl.orderListChoshen"
+            required>
+    </select>
 
-    <ul id="sortable" class="list-group">
-        <li class="list-group-item active">Item 1</li>
-        <li class="list-group-item">Item 2</li>
-        <li class="list-group-item">Item 3</li>
-        <li class="list-group-item">Item 4</li>
-        <li class="list-group-item">Item 5</li>
-        <li class="list-group-item">Item 6</li>
-        <li class="list-group-item">Item 7</li>
-        <li class="list-group-item">Item 8</li>
-    </ul>
+
+<br>
 
 
 

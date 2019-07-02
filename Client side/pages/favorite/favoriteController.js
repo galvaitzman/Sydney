@@ -77,11 +77,9 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
 
     .controller("favoriteController", function($rootScope, $scope, $http, favoriteServices) {
         var self=this;
+        $scope.allSavedPoints=[];
         $scope.existingFavList = JSON.parse(localStorage.getItem("favoriteList"));
         if($scope.existingFavList == null) $scope.existingFavList = [];
-
-        getAllSavedPoints();
-      
 
         function getAllSavedPoints() {
             favoriteServices.getAllSavedPoints().then(function (response) {
@@ -93,6 +91,17 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
                 alert("Get All Saved Points Failed");
             });
         }
+
+        function initialOrderList() {
+            $scope.rankList = [];
+            var lengthOfAllSavePoints = $scope.allSavedPoints.length;
+            for (var i = 1; i <= lengthOfAllSavePoints; i = i + 1)
+                $scope.rankList.push(i);
+        }
+
+        getAllSavedPoints();
+        initialOrderList();
+
 
         self.saveFavoritePointsToServer = function () {
 
@@ -180,10 +189,5 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
                     alert("Get two last review failed");
                 }
             );
-
         };
-
-
-
-
     });

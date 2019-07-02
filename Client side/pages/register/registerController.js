@@ -155,9 +155,6 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
     */
 
 
-    //TODO : multiple selection categories
-
-    // TODO: register function
     self.Register = function () {
         var quesAns1 =
             {
@@ -182,7 +179,6 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
                 Email:self.Email,
                 PASSWORD: self.PASSWORD,
                 QuestionsAnswers: [quesAns1,quesAns2],
-                //TODO: change favoriteCategories to value from multiple selections
                 favoriteCategories: [category1,category2]
             };
 
