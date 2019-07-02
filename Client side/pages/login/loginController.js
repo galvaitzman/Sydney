@@ -48,6 +48,7 @@ angular
     var self = this;
     var current_user = "Guest";
     var current_token = "";
+    $scope.alert_login="";
     $scope.HelloUser = "Hello" + current_user; //DONE by inbar
     $rootScope.currentUser = current_user; //DONE by inbar
     $rootScope.currentToken = current_token;
@@ -74,6 +75,7 @@ angular
     );
 
     self.Login = function() {
+        $scope.alert_login="";
       var userToPass = { USER_NAME: self.USER_NAME, PASSWORD: self.PASSWORD };
       LoginServices.Login(userToPass).then(
         function(response) {
@@ -81,11 +83,7 @@ angular
             response.data == "Wrong Username" ||
             response.data == "Wrong Password"
           ) {
-            //TODO: add message filed with binding
-            //$scope.massage=response.data;
-            alert(response.data);
-            // TODO after the authentication succeeded - move to the next page
-            // TODO forgot my password
+              $scope.alert_login=response.data;
           } else {
             //TODO:REMOVE after moving to the new page
             //alert("success");
@@ -95,7 +93,7 @@ angular
             $rootScope.currentToken = current_token;// DONE by inbar
             $rootScope.isGuest=false;
             alert("Hello " + $rootScope.currentUser); //DONE by inbar
-            $window.location.href = "#!";
+            $window.location.href = "#!/login";
           }
         },
         function(response) {
