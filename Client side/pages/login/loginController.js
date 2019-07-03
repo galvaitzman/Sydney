@@ -93,7 +93,7 @@ angular
             $rootScope.currentToken = current_token;// DONE by inbar
             $rootScope.isGuest=false;
             alert("Hello " + $rootScope.currentUser); //DONE by inbar
-            $window.location.href = "#!/login";
+            $window.location.href = "#!";
           }
         },
         function(response) {
