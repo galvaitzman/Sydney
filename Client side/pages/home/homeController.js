@@ -71,7 +71,7 @@ angular
       this.getTwoMostPopularPoints = function () {
         var req = {
           method: 'GET',
-          url: 'http://localhost:3000/POI/getTwoLastSavedPoints',
+          url: 'http://localhost:3000/POI/getTwoMostPopularPoints',
           headers: {
             'Access-Control-Allow-Origin' : '*',
             'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",

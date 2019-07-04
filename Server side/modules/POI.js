@@ -11,6 +11,9 @@ router.get('/getAllPoints',function (req,res)
         let sql ="select * from POIS order by RANK desc";
         DButilsAzure.execQuery(sql)   
         .then(function(ans) {
+            for (var i=0; i<ans.length; i=i+1){
+                ans[i].RANK =  ans[i].RANK.toFixed(2);
+            }
                 res.json({
                     poi: ans
                 });	
@@ -44,6 +47,7 @@ DButilsAzure.execQuery("select * from POIS where RANK >= "+threshHole+"")
     var i=0;
     var finalAns = [];
     while (i<Math.min(3,ans.length)){
+        ans[i].RANK = ans[i].RANK.toFixed(2)
         finalAns.push(ans[i]);
         i=i+1;
     }  
@@ -79,6 +83,7 @@ router.get('/getTwoLastReviewsOnPoint',function (req,res) {
 
 
 router.post('/reviewPoint',function (req,res) {
+
     if (!req.body.POI_ID || !req.body.REVIEW || !req.body.rank){
         res.send('one of the requierd attribute was not provided');
     }
@@ -123,6 +128,9 @@ router.get('/Category',function (req,res) {
             res.send(Category);
             return;}
         else{  
+            for (var i=0; i<ans.length; i=i+1){
+                ans[i].RANK = ans[i].RANK.toFixed(2); 
+            }
             res.send(ans);
             return;
         }
@@ -161,8 +169,8 @@ router.get('/getTwoMostPopularPoints',function (req,res) {
 		var i = 1;
 		var foundPOIfromAnotherCategory=false			
 		while (i<ans.length && foundPOIfromAnotherCategory==false) {			
-			if (ans[i].CATEGORY_NAME != category1){					
-				POI2 = ans[i].Name;
+			if (ans[i].CATEGORY != category1){					
+				POI2 = ans[i].NAME;
 				foundPOIfromAnotherCategory=true							
 			}		
 			i++;		
@@ -175,6 +183,9 @@ router.get('/getTwoMostPopularPoints',function (req,res) {
 	
 		DButilsAzure.execQuery(query)   
 		.then(function(ans2) {
+            for (var i=0; i<ans2.length; i=i+1){
+                ans2[i].RANK = ans2[i].RANK.toFixed(2); 
+            }
 			res.send(ans2); 
 		})
 	})
@@ -195,6 +206,7 @@ router.get('/getTwoLastSavedPoints',function (req,res) {
             let sql = "select * from POIS where POI_ID in ('"+POI_ID1+"')";
             DButilsAzure.execQuery(sql)    
             .then(function(ans2) {
+                ans2[0].RANK = ans2[0].RANK.toFixed(2);
                 res.send(ans2); 
             })
         }
@@ -204,6 +216,8 @@ router.get('/getTwoLastSavedPoints',function (req,res) {
             let sql = "select * from POIS where POI_ID in ('"+POI_ID1+"','"+POI_ID2+"')";
             DButilsAzure.execQuery(sql)    
             .then(function(ans3) {
+                ans3[0].RANK = ans3[0].RANK.toFixed(2);
+                ans3[1].RANK = ans3[1].RANK.toFixed(2);
                 res.send(ans3); 
             })
         }
@@ -215,17 +229,21 @@ router.get('/getTwoLastSavedPoints',function (req,res) {
 
 router.get('/getAllSavedPoints',function (req,res) {
 		let sql ="select POIS.POI_ID, NAME, IMAGE, NOV, DESCREPTION, RANK,"+
-		 		 "CATEGORY from POIS join FAVOURITE_POINTS on FAVOURITE_POINTS.POI_ID = POIS.POI_ID where FAVOURITE_POINTS.USER_NAME ='"+currentUserName+"'";
+		 		 "CATEGORY from POIS join FAVOURITE_POINTS on FAVOURITE_POINTS.POI_ID = POIS.POI_ID where FAVOURITE_POINTS.USER_NAME ='"+currentUserName+"' order by POSITION";
 		DButilsAzure.execQuery(sql)   
         .then(function(ans) {
-                res.send(ans);
+            for (var i=0; i<ans.length; i=i+1){
+                ans[i].RANK = ans[i].RANK.toFixed(2); 
             }
+            res.send(ans);
+        }
        )
 		.catch(ans=>res.send(""+ans));
 });
 
 
 router.post('/saveFavoritePointsToServer',function (req,res) { //position is +1 even when illegal record is inserted
+
         if (!req.body.POIS_Array || !req.body){
             res.send("no POIS_Array attribute");
         }
@@ -263,6 +281,7 @@ router.post('/saveFavoritePointsToServer',function (req,res) { //position is +1 
      
      
 router.post('/saveFavoritePoint', function (req, res) {
+
         if (!req.body.POI_ID){
             res.send('no POI_ID attribute');
         }

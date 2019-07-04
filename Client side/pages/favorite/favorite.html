@@ -97,14 +97,18 @@
             class="form-control"
             name="category"
             style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-            id="category1"
-            ng-model="favoriteCtrl.orderList"
-            ng-options=" for index in orderList|excludeUsed:favoriteCtrl.orderListChoshen"
+            id="{{poi.POI_ID}}"
+            ng-options=" o.id for o in rankList | filterChosenPOIS:poi.POI_ID "
+            ng-model="item" 
+            ng-change="update(item,poi.POI_ID)"
+           
             required>
     </select>
-
-
-<br>
+    <div class="form-actions">
+        <button class="btn btn-link"  class="btn btn-primary" type="button"
+                ng-click="favoriteCtrl.changePoisOrder()">save new order
+        </button>
+    </div>
 
 
 

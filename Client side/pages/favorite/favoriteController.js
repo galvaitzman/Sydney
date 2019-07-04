@@ -1,9 +1,5 @@
 
 angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,function ($http,$rootScope) {
-
-           
-
-
     this.getAllSavedPoints = function () {
         var req = {
             method: 'GET',
@@ -70,6 +66,23 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
         return $http(req);
     }
 
+    this.setNewOrderForSavedPoints=function(newOrderArray){
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:3000/POI/setNewOrderForSavedPoints',
+            headers: {
+                'Access-Control-Allow-Origin' : '*',
+                'Access-Control-Allow-Methods' :"GET, POST, PUT, DELETE, OPTIONS",
+                'Access-Control-Allow-Headers' : '*',
+                'Access-Control-Max-Age' : '*',
+                'Content-Type': 'application/json'
+            },
+            data: {POI_Array:newOrderArray},
+            params: {token:$rootScope.currentToken}
+        };
+        return $http(req);
+    }
+
 
 
 }])
@@ -78,13 +91,24 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
     .controller("favoriteController", function($rootScope, $scope, $http, favoriteServices) {
         var self=this;
         $scope.allSavedPoints=[];
+        $scope.rankList=[];
+        $scope.lengthOfAllSavePoints=0;
+        
+        
         $scope.existingFavList = JSON.parse(localStorage.getItem("favoriteList"));
         if($scope.existingFavList == null) $scope.existingFavList = [];
 
-        function getAllSavedPoints() {
+        self.getAllSavedPoints = function () {
             favoriteServices.getAllSavedPoints().then(function (response) {
 
                 $scope.allSavedPoints = response.data;
+                $scope.lengthOfAllSavePoints = $scope.allSavedPoints.length;
+                for (var i = 1; i <= $scope.lengthOfAllSavePoints; i = i + 1){
+                    $scope.rankList.push({id:i, isDisabled:false, poi_id:-1});
+                }
+                $scope.item= $scope.rankList[0];
+                
+               
 
             }, function (response) {
                 //TODO: change the alert to informative message
@@ -92,15 +116,17 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
             });
         }
 
-        function initialOrderList() {
-            $scope.rankList = [];
-            var lengthOfAllSavePoints = $scope.allSavedPoints.length;
-            for (var i = 1; i <= lengthOfAllSavePoints; i = i + 1)
-                $scope.rankList.push(i);
+       self.getAllSavedPoints();
+
+       self.initialOrderList =  function () {
+            //$scope.rankList = [];
+            
         }
 
-        getAllSavedPoints();
-        initialOrderList();
+        self.updateOrder = function(id){
+            $scope.rankList[id-1]=null;
+        }
+        self.initialOrderList();
 
 
         self.saveFavoritePointsToServer = function () {
@@ -109,11 +135,10 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
                 localStorage.clear();
                 $rootScope.favCounter=0;
                 $scope.existingFavList=[];
+                $scope.rankList=[];
 
-
-                getAllSavedPoints();
-                getTwoMostPopularPoints();
-                getTwoLastSavedPoints();
+                self.getAllSavedPoints();
+               
 
                 console.log(response);
             }, function (response) {
@@ -169,6 +194,7 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
             $scope.alert_reviews="";
             $scope.alert_addReview="";
             $scope.twoLastReview=[];
+            
             self.review_input="";
             self.rank_input="";
 
@@ -189,5 +215,91 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
                     alert("Get two last review failed");
                 }
             );
+        };
+        $scope.update=function(currentitem,poi_id){
+            if (currentitem){
+                var x= currentitem.id;
+                var i = findWithAttr($scope.rankList,"poi_id",poi_id);
+                if (i!==-1){
+                    $scope.rankList[i].poi_id=-1;
+                    $scope.rankList[i].isDisabled=false;
+                }
+                $scope.rankList[x-1].isDisabled=true;
+                $scope.rankList[x-1].poi_id=poi_id;
+                for(var j = 0; j < $scope.rankList.length; j += 1) {
+                    if($scope.rankList[j]["poi_id"] === -1) {
+                        $scope.item= $scope.rankList[j];
+                        break;
+                    }
+                }
+            }
+            
+        };
+
+        self.changePoisOrder=function(){
+            var counter=0;
+            var lostPoiID=-1;
+            for (var i=0; i<$scope.rankList.length; i=i+1){
+                if ($scope.rankList[i].poi_id == -1){
+                    counter = counter + 1;
+                }
+                if (findWithAttr($scope.rankList,"poi_id",$scope.allSavedPoints[i].POI_ID)==-1){
+                    lostPoiID = $scope.allSavedPoints[i].POI_ID;
+                }
+            }
+
+            if (counter >1) return false;
+            var newOrderArray=[];
+            for (var j=0; j<$scope.rankList.length; j=j+1){
+                if ($scope.rankList[j].poi_id==-1 ){
+                    newOrderArray.push({POI_ID:lostPoiID,POSITION:j})
+                }
+                else{
+                    newOrderArray.push({POI_ID:$scope.rankList[j].poi_id,POSITION:j})
+                }
+            }
+            favoriteServices.setNewOrderForSavedPoints(newOrderArray).then(
+                function (response) {
+                    $scope.rankList=[];
+                    self.getAllSavedPoints();
+                    
+                    // if (response.data == "one of the requierd attribute was not provided") {
+                    //     alert(response.data);
+                    // } else {
+                    //     alert("Review saved successfully");
+                    // }
+                },
+                function (response) {
+                    //self.Login.content = "Add review failed";
+                }
+            );
+
+            
+        };
+        
+        function findWithAttr(array, attr, value) {
+            for(var i = 0; i < array.length; i += 1) {
+                if(array[i][attr] === value) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+
+       
+
+    })
+
+    .filter('filterChosenPOIS', function(){
+    
+        return function(items, name){ 
+            var arrayToReturn = [];        
+            for (var i=0; i<items.length; i++){
+                if (items[i].isDisabled==false || items[i].poi_id == name) {
+                    arrayToReturn.push(items[i]);
+                }
+            }
+            
+            return arrayToReturn;
         };
     });
