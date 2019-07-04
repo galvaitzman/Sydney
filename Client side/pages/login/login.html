@@ -26,9 +26,11 @@
                    ng-model="loginCtrl.PASSWORD" required/>
            <span ng-show="form.PASSWORD.$dirty && form.PASSWORD.$error.required" class="help-block">Password is required</span>
 </div>
+
 <br><br>
+    <p style="color:red">{{alert_login}}</p>
 <div class="form-actions">
-               <a  href="" class="btn btn-primary" type="submit" ng-disabled="form.$invalid"
+               <a  href="" class="btn btn-primary" type="submit"
                        ng-click="loginCtrl.Login()">Submit</a>
        </div>
     <br>

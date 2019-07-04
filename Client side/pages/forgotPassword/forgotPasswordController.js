@@ -38,17 +38,42 @@ angular.module("myApp").service('forgotPasswordServices',[ '$http', function ($h
 
     .controller('forgotPasswordController', function ($scope,forgotPasswordServices){
         var self = this;
+        $scope.alert_user="";
+        $scope.alert_answer="";
+       
+        var second = document.getElementById("seconddiv");
+     
+        second.style.display = (
+            second.style.display == "none" ? "block" : "none"); 
+
+
+
         self.getRandomQuestion = function () {
+            $scope.alert_user="";
             forgotPasswordServices.getRandomQuestion(self.USER_NAME).then(function (response){
-                $scope.ques = response.data;
+                if(response.data=="no USER_NAME attribute")
+                    $scope.alert_user="Wrong user name";
+                else
+                {
+                    $scope.ques = response.data;
+                    var first = document.getElementById("firstdiv"); 
+                    var second = document.getElementById("seconddiv");
+                 
+                    first.style.display = (
+                        first.style.display == "none" ? "block" : "none"); 
+                    second.style.display = (
+                        second.style.display == "none" ? "block" : "block"); 
+                }
+
             }, function (response) {
-                //TODO : change the alert
                 alert("Get ques failed");
             });
+        
         };
 
 
         self.RetrievePassword = function () {
+            $scope.alert_answer="";
             var dataToPass = {
                 USER_NAME: self.USER_NAME,
                 ANSWER: self.answer,
@@ -56,11 +81,9 @@ angular.module("myApp").service('forgotPasswordServices',[ '$http', function ($h
             }
             forgotPasswordServices.RetrievePassword(dataToPass).then(function (response){
                 if(response.data=="wrong answer. please try again" || response.data =="error" ||response.data =="the given user did not answer the given question when registerd")
-                    //TODO : change alert
-                    alert(response.data);
-                else $scope.password = response.data;
+                    $scope.alert_answer=response.data;
+                else alert(response.data);
             }, function (response) {
-                //TODO : change the alert
                 alert("Get ques failed");
             });
         };

@@ -3,7 +3,7 @@ var router = express.Router();
 var app = express();
 var DButilsAzure = require('../DButils');
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var Countries = ["Ausralia","Bolovia","China","Denemark","Israel","Latvia","Monaco","August","Norway","Panama","Switzerland","USA"];
+var Countries = ["Australia","Bolivia","China","Denemark","Israel","Latvia","Monaco","August","Norway","Panama","Switzerland","USA"];
 
 
 
@@ -168,6 +168,10 @@ router.get('/getRandomQuestion',function(req,res) {
         if (ans.length != 0){
             var rand = ans[Math.floor(Math.random() * ans.length)];
             res.send(rand);
+        }
+        else 
+        {
+            res.send("no USER_NAME attribute"); 
         }
     })        
     .catch(ans=>res.send("error"));

@@ -77,7 +77,7 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
 
 
 
-.controller('registerController', function ($scope,$http,registerServices){
+.controller('registerController', function ($scope,$http,registerServices,$window){
 
     var self = this;
     self.question1List = '';
@@ -86,6 +86,7 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
     self.categories2List = '';
     $scope.questions = [];
     $scope.categories = [];
+    $scope.alert_register="";
 
 // TODO: move http function to Service
     $http({
@@ -137,25 +138,9 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
         console.log($scope.countries_list)
     };
 
-    /*
-        $scope.$watch('selected', function(nowSelected){
-            // reset to nothing, could use `splice` to preserve non-angular references
-            $scope.selectedValues = [];
-
-            if( ! nowSelected ){
-                // sometimes selected is null or undefined
-                return;
-            }
-
-            // here's the magic
-            angular.forEach(nowSelected, function(val){
-                $scope.selectedValues.push( val.id.toString() );
-            });
-        });
-    */
-
 
     self.Register = function () {
+        $scope.alert_register="";
         var quesAns1 =
             {
                 QUESTION_ID: document.getElementById("ques1").options[document.getElementById("ques1").selectedIndex].text,
@@ -188,14 +173,13 @@ angular.module("myApp").service('registerServices',['$http', function ($http) {
         // TODO: change the alerts to informative message on the html page
         registerServices.Register(userToPass).then(function (response){
             if(response.data == "Please Choose Another User Name") {
-                //$scope.massage=response.data;
-                alert(response.data);
+                $scope.alert_register=response.data;
             } else{
-                alert("success");
+                alert("Register success");
+                $window.location.href = "index.html#!/login";
             }
         }, function (response) {
-
-            alert("Login failed");
+            alert("Register failed");
 
         });
     };

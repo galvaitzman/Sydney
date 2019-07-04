@@ -12,9 +12,8 @@
                 <div class="modal-body">
                     <!-- <div class = "single-img" ng-repeat="x in records"> -->
                     <b>Category</b> : {{alert_category}}
-                    <input class="star" type="checkbox" title="Favorite" ng-show=$root.userLoggedIn ng-click="updateFavoritesPoints(POINTid)" ng-checked="fav">
                     <br>
-                    <b>Rank</b> : {{ alert_RANK }}
+                    <b>Rank</b> : {{ alert_RANK}}
                     <br>
                     <b>Number of views</b> : {{alert_NOV}}
                     <br>
@@ -26,7 +25,7 @@
                     <h4><b>Last 2 reviews</b></h4>
                     <p align="center" ng-repeat="poi in twoLastReview">
                         <b>Review</b> : {{ poi.REVIEW }}<br>
-                        <b>Date</b> : {{poi.DATE}}
+                        <b>Date</b> : {{poi.DATE.substr(0,10)}}
                         <br>
                         <br>
                     </p>

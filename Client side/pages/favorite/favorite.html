@@ -25,7 +25,7 @@
                 <h4><b>Last 2 reviews</b></h4>
                 <p align="center" ng-repeat="poi in twoLastReview">
                     <b>Review</b> : {{ poi.REVIEW }}<br>
-                    <b>Date</b> : {{poi.DATE}}
+                    <b>Date</b> : {{poi.DATE.substr(0,10)}}
                     <br>
                     <br>
                 </p>
