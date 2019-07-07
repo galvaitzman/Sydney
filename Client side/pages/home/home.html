@@ -63,8 +63,9 @@
 
 
     <p align="center" ng-repeat="poi in random3POIlist" ng-show="isGuest">
-  POI Name: {{ poi.NAME }}<br />
-  POI Rank: {{ poi.RANK }}<br />
+            <button style="font-size : 20px; background:none; border:none; margin:0; padding:0; cursor: pointer" ng-click="homeCtrl.showAllInformation(poi)" data-target="#exampleModal" data-toggle="modal"> {{ poi.NAME }}</button>
+        <br>
+  POI Rank: {{ poi.RANK }}<br>
   <img data-toggle="modal" data-target="#exampleModal" ng-click="homeCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
 
 
@@ -77,8 +78,9 @@
 
 <p ng-repeat="poi in twoLastSavedPoints" ng-show="!isGuest" >
 
-    POI Name: {{ poi.NAME }}<br />
-    POI Rank: {{ poi.RANK }}<br />
+        <button style="font-size : 20px; background:none; border:none; margin:0; padding:0; cursor: pointer" ng-click="homeCtrl.showAllInformation(poi)" data-target="#exampleModal" data-toggle="modal"> {{ poi.NAME }}</button>
+        <br>
+    POI Rank: {{ poi.RANK }}<br>
     <img data-toggle="modal" data-target="#exampleModal" ng-click="homeCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
     
 </p>
@@ -91,8 +93,9 @@
 <br>
 
 <p ng-repeat="poi in twoMostPopularPoints" ng-show="!isGuest">
-    POI Name: {{ poi.NAME }}<br />
-    POI Rank: {{ poi.RANK }}<br />
+        <button style="font-size : 20px; background:none; border:none; margin:0; padding:0; cursor: pointer" ng-click="homeCtrl.showAllInformation(poi)" data-target="#exampleModal" data-toggle="modal"> {{ poi.NAME }}</button>
+        <br>
+    POI Rank: {{ poi.RANK }}<br>
     <img data-toggle="modal" data-target="#exampleModal" ng-click="homeCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
 </p>
 </p>

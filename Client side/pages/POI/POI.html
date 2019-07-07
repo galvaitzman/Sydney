@@ -111,13 +111,15 @@
         </h3>
 
         <p ng-repeat="i in poi.elements">
-            POI Name: {{ i.NAME }}<br>
-            POI Rank: {{ i.RANK }}<br>
-            POI Category: {{ i.CATEGORY }}<br>
+            <button style="font-size : 20px; background:none; border:none; margin:0; padding:0; cursor: pointer" ng-click="POICtrl.showAllInformation(i)" data-target="#exampleModal" data-toggle="modal"> {{ i.NAME }}</button>
+            <br>
+            Rank: {{ i.RANK }}<br>
+            Category: {{ i.CATEGORY }}<br>
             <img data-toggle="modal" data-target="#exampleModal" ng-click="POICtrl.showAllInformation(i)" height="400" width="600" ng-src="{{ i.IMAGE }}" />
 
             <img ng-show="!isGuest" id="{{i.POI_ID}}" ng-src="{{initFuncToFillStarButton(i)}}" ng-click="myFunction(i)" class="favorite" height="50"  width="50"/></img>
-
+            <br>
+            <br>
         </p>
     </div>
 
