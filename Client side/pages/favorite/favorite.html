@@ -88,15 +88,16 @@
 <br>
 <br>
 
-<p ng-repeat="poi in allSavedPoints">
-    POI Name: {{ poi.NAME }}<br />
-    POI Rank: {{ poi.RANK }}<br />
+<p ng-repeat="poi in allSavedPoints" ng-click="favoriteCtrl.showAllInformation(poi)">
+    <button style="background:none; border:none; margin:0; padding:0; cursor: pointer" ng-click="favoriteCtrl.showAllInformation(poi)" data-target="#exampleModal" data-toggle="modal"> {{ poi.NAME }}</button>
+    <br>
+    Rank: {{ poi.RANK }}<br>
     <img data-toggle="modal" data-target="#exampleModal" ng-click="favoriteCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
-
+    <br> new Position: &nbsp; &nbsp;
     <select type="text"
             class="form-control"
             name="category"
-            style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+            style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px; display:inline-block"
             id="{{poi.POI_ID}}"
             ng-options=" o.id for o in rankList | filterChosenPOIS:poi.POI_ID "
             ng-model="item" 
@@ -104,11 +105,11 @@
            
             required>
     </select>
-    <div class="form-actions">
-        <button class="btn btn-link"  class="btn btn-primary" type="button"
-                ng-click="favoriteCtrl.changePoisOrder()">save new order
-        </button>
-    </div>
+    <br>
+    </p>
+    <a  href="" class="btn btn-primary" type="submit" class="btn btn-primary"
+    ng-click="favoriteCtrl.changePoisOrder()">save new order</a>
+   
 
 
 
