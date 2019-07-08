@@ -79,13 +79,15 @@
 
         <div class="form-group" ng-class="{ 'has-error': form.Email.$dirty && form.Email.$error.required }" >
             <label for="Email">Email</label>
-            <input type="email"
+            <input type="text"
                    name="Email"
-                   placeholder="Enter your email"
+                   ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
+                   placeholder="Enter your email. e.g. a@a.com"
                    style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
                    id="Email" class="form-control"
                    ng-model="registerCtrl.Email" required/>
             <span ng-show="form.Email.$dirty && form.Email.$error.required" class="help-block">Email is required</span>
+            <span ng-show="form.Email.$error.pattern">please provide ligal Email</span>
         </div>
 
 
@@ -152,7 +154,7 @@
     </select>
     <input type="text"
            name="ans2"
-           placeholder="Enter your answer to the first question"
+           placeholder="Enter your answer to the second question"
            style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
            id="ans2" class="form-control"
            ng-model="registerCtrl.ans2" required/>
