@@ -21,7 +21,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="exampleModalLabel">
-            <b>{{ alert_name }}</b>
+            <b class="font" align="center">{{ alert_name }}</b>
           </h4>
           <button
             type="button"
@@ -44,19 +44,21 @@
             ng-checked="fav"
           />
           <br />
-          <b>Rank</b> : {{ alert_RANK }}
-          <br />
-          <b>Number of views</b> : {{ alert_NOV }}
-          <br />
-          <b>Number of review</b> : {{ alert_NOR }}
-          <br />
-          <b>Description</b> : {{ alert_desc }}
-          <br />
-          <br />
-          <h4><b>Last 2 reviews</b></h4>
+          <div align="left">
+            <b class="font">Rank</b> : {{ alert_RANK }}
+            <br />
+            <b class="font">Number of views</b> : {{ alert_NOV }}
+            <br />
+            <b class="font">Number of review</b> : {{ alert_NOR }}
+            <br />
+            <b class="font">Description</b> : {{ alert_desc }}
+            <br />
+            <br />
+          </div>
+          <h4><b class="font">Last 2 reviews</b></h4>
           <p align="center" ng-repeat="poi in twoLastReview">
-            <b>Review</b> : {{ poi.REVIEW }}<br />
-            <b>Date</b> : {{ poi.DATE.substr(0, 10) }}
+            <b class="font">Review</b> : {{ poi.REVIEW }}<br />
+            <b class="font">Date</b> : {{ poi.DATE.substr(0, 10) }}
             <br />
             <br />
           </p>
@@ -67,7 +69,7 @@
           <br />
           <br />
 
-          <input
+          <input  class="input"
             type="text"
             name="rank_input"
             style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
@@ -75,7 +77,7 @@
             placeholder="Enter rank"
             ng-model="favoriteCtrl.rank_input"
           />
-          <input
+          <input  class="input"
             type="text"
             name="review_input"
             style="width: 300px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
@@ -87,7 +89,7 @@
 
           <p style="color:red">{{ alert_addReview }}</p>
 
-          <button
+          <button  id="button"
             ng-click="favoriteCtrl.AddReview()"
             type="button"
             class="btn btn-primary"
@@ -112,7 +114,7 @@
             ng-src="{{ poi.IMAGE }}"
           />
         <div class="bottom-left">
-              {{ poi.NAME }}<br />
+          <button style="font-size : 20px; background:none; border:none; margin:0; padding:0; cursor: pointer" ng-click="favoriteCtrl.showAllInformation(poi)" data-target="#exampleModal" data-toggle="modal"> {{ poi.NAME }}</button><br />
               Rank: {{ poi.RANK }}<br />
         </div>
       </div>
@@ -158,22 +160,22 @@
         ng-src="{{ poi.IMAGE }}"
       />
       <div class="bottom-left">
-        {{ poi.NAME }}<br />
+        <button style="font-size : 20px; background:none; border:none; margin:0; padding:0; cursor: pointer" ng-click="favoriteCtrl.showAllInformation(poi)" data-target="#exampleModal" data-toggle="modal"> {{ poi.NAME }}</button><br />
         Rank: {{ poi.RANK }}<br />
       </div>
     </div>
 
-    <select
-      type="text"
-      class="form-control"
-      name="category"
-      style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-      id="{{ poi.POI_ID }}"
-      ng-options=" o.id for o in rankList | filterChosenPOIS:poi.POI_ID "
-      ng-model="item"
-      ng-change="update(item,poi.POI_ID)"
-      required
-    >
+    <br> new Position: &nbsp; &nbsp;
+    <select type="text"
+            class="form-control"
+            name="category"
+            style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px; display:inline-block"
+            id="{{poi.POI_ID}}"
+            ng-options=" o.id for o in rankList | filterChosenPOIS:poi.POI_ID "
+            ng-model="item" 
+            ng-change="update(item,poi.POI_ID)"
+           
+            required>
     </select>
   </div>
 

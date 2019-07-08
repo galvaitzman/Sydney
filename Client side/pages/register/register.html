@@ -31,18 +31,25 @@
         required
       />
 
-      <span ng-show="form.USER_NAME.$error.maxlength"
+      <span
+        ng-show="form.USER_NAME.$error.maxlength"
+        style="color:rgb(153, 45, 45);"
         >* Must contain a maximum of 8 characters</span
       >
-      <span ng-show="form.USER_NAME.$error.minlength"
+      <span
+        ng-show="form.USER_NAME.$error.minlength"
+        style="color:rgb(153, 45, 45);"
         >* Must contain at least 3 characters</span
       >
-      <span ng-show="form.USER_NAME.$error.pattern"
+      <span
+        ng-show="form.USER_NAME.$error.pattern"
+        style="color:rgb(153, 45, 45);"
         >* Must contain only letters</span
       >
       <span
         ng-show="form.USER_NAME.$dirty && form.USER_NAME.$error.required"
         class="help-block"
+        style="color:rgb(153, 45, 45);"
         >User name is required</span
       >
       <p>{{ userNameError }}</p>
@@ -59,6 +66,7 @@
         placeholder="Enter your first name"
         style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
         id="FirstName"
+        ng-pattern="/^[a-zA-Z\s]*$/"
         class="form-control"
         ng-model="registerCtrl.FirstName"
         required
@@ -66,6 +74,7 @@
       <span
         ng-show="form.FirstName.$dirty && form.FirstName.$error.required"
         class="help-block"
+        style="color:rgb(153, 45, 45);"
         >First name is required</span
       >
     </div>
@@ -81,6 +90,7 @@
         placeholder="Enter your last name"
         style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
         id="LastName"
+        ng-pattern="/^[a-zA-Z\s]*$/"
         class="form-control"
         ng-model="registerCtrl.LastName"
         required
@@ -88,6 +98,7 @@
       <span
         ng-show="form.LastName.$dirty && form.LastName.$error.required"
         class="help-block"
+        style="color:rgb(153, 45, 45);"
         >Last name is required</span
       >
     </div>
@@ -110,6 +121,7 @@
       <span
         ng-show="form.City.$dirty && form.City.$error.required"
         class="help-block"
+        style="color:rgb(153, 45, 45);"
         >City is required</span
       >
     </div>
@@ -139,6 +151,7 @@
       <span
         ng-show="form.Country.$dirty && form.Country.$error.required"
         class="help-block"
+        style="color:rgb(153, 45, 45);"
         >Country is required</span
       >
     </div>
@@ -149,9 +162,10 @@
     >
       <label for="Email">Email</label>
       <input
-        type="email"
+        type="text"
         name="Email"
-        placeholder="Enter your email"
+        ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
+        placeholder="Enter your email. e.g. a@a.com"
         style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
         id="Email"
         class="form-control"
@@ -161,7 +175,13 @@
       <span
         ng-show="form.Email.$dirty && form.Email.$error.required"
         class="help-block"
+        style="color:rgb(153, 45, 45);"
         >Email is required</span
+      >
+      <span
+        style="color:rgb(153, 45, 45);"
+        ng-show="form.Email.$dirty && form.Email.$error.pattern"
+        >please provide legal Email</span
       >
     </div>
 
@@ -183,30 +203,28 @@
         ng-model="registerCtrl.PASSWORD"
         required
       />
-      <span ng-show="form.PASSWORD.$error.maxlength"
+      <span
+        ng-show="form.PASSWORD.$error.maxlength"
+        style="color:rgb(153, 45, 45);"
         >* Must contain a maximum of 10 characters</span
       >
-      <span ng-show="form.PASSWORD.$error.minlength"
+      <span
+        ng-show="form.PASSWORD.$error.minlength"
+        style="color:rgb(153, 45, 45);"
         >* Must contain at least 5 characters</span
       >
-      <span ng-show="form.PASSWORD.$error.pattern"
+      <span
+        ng-show="form.PASSWORD.$error.pattern"
+        style="color:rgb(153, 45, 45);"
         >* Must contain only numbers and letters</span
       >
       <span
         ng-show="form.PASSWORD.$dirty && form.PASSWORD.$error.required"
         class="help-block"
+        style="color:rgb(153, 45, 45);"
         >Password is required</span
       >
     </div>
-
-    <!--
-        <select multiple>
-            <option value="1">Blue</option>
-            <option value="2">Green</option>
-            <option value="3">Yellow</option>
-            <option value="4">Red</option>
-        </select>
--->
 
     <br />
     <h5>Choose first question:</h5>
@@ -239,6 +257,7 @@
       <span
         ng-show="form.ques1.$dirty && form.ques1.$error.required"
         class="help-block"
+        style="color:rgb(153, 45, 45);"
         >question 1 is required</span
       >
     </div>
@@ -264,7 +283,7 @@
       <input
         type="text"
         name="ans2"
-        placeholder="Enter your answer to the first question"
+        placeholder="Enter your answer to the second question"
         style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
         id="ans2"
         class="form-control"
@@ -274,6 +293,7 @@
       <span
         ng-show="form.ques2.$dirty && form.ques2.$error.required"
         class="help-block"
+        style="color:rgb(153, 45, 45);"
         >question 2 is required</span
       >
     </div>

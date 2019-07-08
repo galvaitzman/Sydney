@@ -133,7 +133,7 @@
                     <img class="active" data-toggle="modal" data-target="#exampleModal" ng-click="POICtrl.showAllInformation(i)" height="600" alt="Snow" style="width:80%;" ng-src="{{ i.IMAGE }}" />
                    <img class="active" ng-show="!isGuest" id="{{i.POI_ID}}" ng-src="{{initFuncToFillStarButton(i)}}" ng-click="myFunction(i)"  height="50"  width="50"/>
                     <div class="bottom-left">
-                     {{ i.NAME }}<br>
+                    <button style="font-size : 20px; background:none; border:none; margin:0; padding:0; cursor: pointer" ng-click="POICtrl.showAllInformation(i)" data-target="#exampleModal" data-toggle="modal"> {{ i.NAME }}</button><br>
                     Rank: {{ i.RANK }}<br>
                     Category: {{ i.CATEGORY }}<br>
                     </div>

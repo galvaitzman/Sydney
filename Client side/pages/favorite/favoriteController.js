@@ -248,7 +248,7 @@ angular.module("myApp").service('favoriteServices', ['$http','$rootScope' ,funct
                 }
             }
 
-            if (counter >1) return false;
+            if (counter >1 || $scope.rankList.length<=1) return false;
             var newOrderArray=[];
             for (var j=0; j<$scope.rankList.length; j=j+1){
                 if ($scope.rankList[j].poi_id==-1 ){

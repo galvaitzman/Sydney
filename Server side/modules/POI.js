@@ -229,7 +229,7 @@ router.get('/getTwoLastSavedPoints',function (req,res) {
 
 router.get('/getAllSavedPoints',function (req,res) {
 		let sql ="select POIS.POI_ID, NAME, IMAGE, NOV, DESCREPTION, RANK,"+
-		 		 "CATEGORY from POIS join FAVOURITE_POINTS on FAVOURITE_POINTS.POI_ID = POIS.POI_ID where FAVOURITE_POINTS.USER_NAME ='"+currentUserName+"' order by POSITION";
+		 		 "CATEGORY,NOR from POIS join FAVOURITE_POINTS on FAVOURITE_POINTS.POI_ID = POIS.POI_ID where FAVOURITE_POINTS.USER_NAME ='"+currentUserName+"' order by POSITION";
 		DButilsAzure.execQuery(sql)   
         .then(function(ans) {
             for (var i=0; i<ans.length; i=i+1){
