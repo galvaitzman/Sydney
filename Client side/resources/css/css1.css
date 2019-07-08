@@ -113,3 +113,11 @@ body {
 .input {
   font-family: "Montserrat", sans-serif;
 }
+
+#wordToSearch {
+  font-family: "Montserrat", sans-serif;
+}
+
+#categoryToFilter {
+  font-family: "Montserrat", sans-serif;
+}

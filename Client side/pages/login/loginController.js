@@ -43,27 +43,21 @@ angular
     LoginServices,
     $rootScope,
     $window
-
   ) {
     var self = this;
     var current_user = "Guest";
     var current_token = "";
-    $scope.alert_login="";
+    $scope.alert_login = "";
     $scope.HelloUser = "Hello" + current_user; //DONE by inbar
     $rootScope.currentUser = current_user; //DONE by inbar
     $rootScope.currentToken = current_token;
-    $rootScope.favCounter=0;
-    $rootScope.isGuest=true;
+    $rootScope.favCounter = 0;
+    $rootScope.isGuest = true;
 
-    
-
-     /* localStorage.clear();
+    /* localStorage.clear();
       console.log(localStorage);*/
 
-      var existingFavList = JSON.parse(localStorage.getItem("favoriteList"));
-      if(existingFavList != null)
-          $rootScope.favCounter=existingFavList.length;
-
+    var existingFavList = JSON.parse(localStorage.getItem("favoriteList"));
 
     LoginServices.random3POI().then(
       function(response) {
@@ -75,7 +69,7 @@ angular
     );
 
     self.Login = function() {
-        $scope.alert_login="";
+      $scope.alert_login = "";
       var userToPass = { USER_NAME: self.USER_NAME, PASSWORD: self.PASSWORD };
       LoginServices.Login(userToPass).then(
         function(response) {
@@ -83,15 +77,21 @@ angular
             response.data == "Wrong Username" ||
             response.data == "Wrong Password"
           ) {
-              $scope.alert_login=response.data;
+            $scope.alert_login = response.data;
           } else {
             //TODO:REMOVE after moving to the new page
             //alert("success");
             current_user = userToPass.USER_NAME;
             current_token = response.data;
             $rootScope.currentUser = current_user; //DONE by inbar
-            $rootScope.currentToken = current_token;// DONE by inbar
-            $rootScope.isGuest=false;
+            $rootScope.currentToken = current_token; // DONE by inbar
+            $rootScope.isGuest = false;
+            if (existingFavList != null) {
+              for (var i = 0; i < existingFavList.length; i = i + 1) {
+                if (existingFavList[i].currentUser == $rootScope.currentUser)
+                  $rootScope.favCounter++;
+              }
+            }
             alert("Hello " + $rootScope.currentUser); //DONE by inbar
             $window.location.href = "#!";
           }
