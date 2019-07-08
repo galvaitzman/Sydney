@@ -1,115 +1,191 @@
 <center>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="textOverImage">
+    <img
+      height="30%"
+      width="100%"
+      src="   https://in.sydney.com/sites/international/files/styles/header_slider/public/2016-12/Toowoon-Bay-Central-Coast-Image-Destination-NSW.jpg?itok=YW98BF56"
+    />
+    <div class="centered">FAVORITE POINTS</div>
+  </div>
+  <br />
+
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel"><b>{{alert_name}}</b></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- <div class = "single-img" ng-repeat="x in records"> -->
-                <b>Category</b> : {{alert_category}}
-                <input class="star" type="checkbox" title="Favorite" ng-show=$root.userLoggedIn ng-click="updateFavoritesPoints(POINTid)" ng-checked="fav">
-                <br>
-                <b>Rank</b> : {{ alert_RANK }}
-                <br>
-                <b>Number of views</b> : {{alert_NOV}}
-                <br>
-                <b>Number of review</b> : {{alert_NOR}}
-                <br>
-                <b>Description</b> : {{alert_desc}}
-                <br>
-                <br>
-                <h4><b>Last 2 reviews</b></h4>
-                <p align="center" ng-repeat="poi in twoLastReview">
-                    <b>Review</b> : {{ poi.REVIEW }}<br>
-                    <b>Date</b> : {{poi.DATE.substr(0,10)}}
-                    <br>
-                    <br>
-                </p>
-                {{alert_reviews}}
-                <br>
-                <br>
-                <img height="300" width="450" ng-src={{alert_image}}>
-                <br>
-                <br>
-
-
-                <input  type="text"
-                        name="rank_input"
-                        style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-                        id="rank_input"
-                        placeholder="Enter rank"
-                        ng-model="favoriteCtrl.rank_input"/>
-                <input  type="text"
-                        name="review_input"
-                        style="width: 300px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-                        id="review_input"
-                        placeholder="Enter review"
-                        ng-model="favoriteCtrl.review_input"/>
-                <br>
-
-                <p style="color:red">{{alert_addReview}}</p>
-
-
-                <button ng-click="favoriteCtrl.AddReview()" type="button" class="btn btn-primary">Add review</button>
-
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">
+            <b>{{ alert_name }}</b>
+          </h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          <!-- <div class = "single-img" ng-repeat="x in records"> -->
+          <b>Category</b> : {{ alert_category }}
+          <input
+            class="star"
+            type="checkbox"
+            title="Favorite"
+            ng-show="$root.userLoggedIn"
+            ng-click="updateFavoritesPoints(POINTid)"
+            ng-checked="fav"
+          />
+          <br />
+          <b>Rank</b> : {{ alert_RANK }}
+          <br />
+          <b>Number of views</b> : {{ alert_NOV }}
+          <br />
+          <b>Number of review</b> : {{ alert_NOR }}
+          <br />
+          <b>Description</b> : {{ alert_desc }}
+          <br />
+          <br />
+          <h4><b>Last 2 reviews</b></h4>
+          <p align="center" ng-repeat="poi in twoLastReview">
+            <b>Review</b> : {{ poi.REVIEW }}<br />
+            <b>Date</b> : {{ poi.DATE.substr(0, 10) }}
+            <br />
+            <br />
+          </p>
+          {{ alert_reviews }}
+          <br />
+          <br />
+          <img height="300" width="450" ng-src="{{ alert_image }}" />
+          <br />
+          <br />
+
+          <input
+            type="text"
+            name="rank_input"
+            style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+            id="rank_input"
+            placeholder="Enter rank"
+            ng-model="favoriteCtrl.rank_input"
+          />
+          <input
+            type="text"
+            name="review_input"
+            style="width: 300px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+            id="review_input"
+            placeholder="Enter review"
+            ng-model="favoriteCtrl.review_input"
+          />
+          <br />
+
+          <p style="color:red">{{ alert_addReview }}</p>
+
+          <button
+            ng-click="favoriteCtrl.AddReview()"
+            type="button"
+            class="btn btn-primary"
+          >
+            Add review
+          </button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
+  <br />
+  <br />
+  <h1 class="secondTitle">Wish List</h1>
+  <img style="width: 40px; height: 40px;" src="https://png.pngtree.com/svg/20161202/e7f5a90a9e.svg" /><br />
+  <br />
+  <div class="font" align="center" ng-repeat="poi in existingFavList">
+      <div class="textOverImage">
+            <img
+            data-toggle="modal"
+            data-target="#exampleModal"  ng-click="favoriteCtrl.showAllInformation(poi)"   height="600" alt="Snow" style="width:80%;"
+            ng-src="{{ poi.IMAGE }}"
+          />
+        <div class="bottom-left">
+              {{ poi.NAME }}<br />
+              Rank: {{ poi.RANK }}<br />
+        </div>
+      </div>
+    </br>
+</br>
+</br>   
+  </div>
 
+  <br />
 
-    <br>
-    <br>
-    <h1>Wish List</h1> <img style="width: 40px; height: 40px;" src="https://png.pngtree.com/svg/20161202/e7f5a90a9e.svg"><br>
-    <br>
-    <p ng-repeat="poi in existingFavList">
+  <a
+    id="button"
+    href=""
+    class="btn btn-primary"
+    type="submit"
+    class="btn btn-primary"
+    ng-click="favoriteCtrl.saveFavoritePointsToServer()"
+    >Save new points to favorites</a
+  >
+  <br />
+  <br />
+  <br />
+  <br />
+  <h1 class="secondTitle">All Saved Points</h1>
 
-        POI Name: {{ poi.NAME }}<br />
-        POI Rank: {{ poi.RANK }}<br />
-        <img data-toggle="modal" data-target="#exampleModal" ng-click="favoriteCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
+  <img
+    style="width: 40px; height: 40px;"
+    src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/256/star-full-icon.png"
+  /><br />
+  <br />
+  <br />
 
-    </p>
+  <div class="font" align="center" ng-repeat="poi in allSavedPoints">
+    <div class="textOverImage">
+      <img
+        class="active"
+        data-toggle="modal"
+        data-target="#exampleModal"
+        ng-click="favoriteCtrl.showAllInformation(poi)"
+        height="600"
+        alt="Snow"
+        style="width:80%;"
+        ng-src="{{ poi.IMAGE }}"
+      />
+      <div class="bottom-left">
+        {{ poi.NAME }}<br />
+        Rank: {{ poi.RANK }}<br />
+      </div>
+    </div>
 
-    <br>
-    <a  href="" class="btn btn-primary" type="submit" class="btn btn-primary"
-        ng-click="favoriteCtrl.saveFavoritePointsToServer()">Save new points to favorites</a>
-    <br>
-    <br>
-    <br>
-
-
-<h1>All Saved Points</h1>
-    <img style="width: 40px; height: 40px;" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/256/star-full-icon.png"><br>
-<br>
-<br>
-
-<p ng-repeat="poi in allSavedPoints">
-    POI Name: {{ poi.NAME }}<br />
-    POI Rank: {{ poi.RANK }}<br />
-    <img data-toggle="modal" data-target="#exampleModal" ng-click="favoriteCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
-
-    <select type="text"
-            class="form-control"
-            name="category"
-            style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-            id="{{poi.POI_ID}}"
-            ng-options=" o.id for o in rankList | filterChosenPOIS:poi.POI_ID "
-            ng-model="item" 
-            ng-change="update(item,poi.POI_ID)"
-           
-            required>
+    <select
+      type="text"
+      class="form-control"
+      name="category"
+      style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+      id="{{ poi.POI_ID }}"
+      ng-options=" o.id for o in rankList | filterChosenPOIS:poi.POI_ID "
+      ng-model="item"
+      ng-change="update(item,poi.POI_ID)"
+      required
+    >
     </select>
-    <div class="form-actions">
-        <button class="btn btn-link"  class="btn btn-primary" type="button"
-                ng-click="favoriteCtrl.changePoisOrder()">save new order
-        </button>
-    </div>
+  </div>
 
-
-
+  <div class="form-actions">
+    <button
+      id="font"
+      class="btn btn-link"
+      class="btn btn-primary"
+      type="button"
+      ng-click="favoriteCtrl.changePoisOrder()"
+    >
+      save new order
+    </button>
+  </div>
 </center>

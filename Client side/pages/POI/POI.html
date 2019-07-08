@@ -1,31 +1,47 @@
+
+<div class='section_header'>
+        <div class='photo'>
+          <img src="https://int.sydney.com/sites/international/files/styles/header_slider/public/2016-12/SydneyHarbour-ImageDNSW.jpg?itok=iHl_W70u"
+               srcset='https://int.sydney.com/sites/international/files/styles/header_slider/public/2016-12/SydneyHarbour-ImageDNSW.jpg?itok=iHl_W70u 2000w,
+               https://int.sydney.com/sites/international/files/styles/header_slider/public/2016-12/SydneyHarbour-ImageDNSW.jpg?itok=iHl_W70uimages/photo-small.jpg 1000w'
+               sizes='(min-width: 960px) 960px,
+                      100vw'/>
+        </div>
+      </div>
+
+
 <center>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel"><b>{{alert_name}}</b></h4>
+                    <h4 class="modal-title" id="exampleModalLabel"><b class="font" align="center">{{alert_name}}</b></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <!-- <div class = "single-img" ng-repeat="x in records"> -->
-                    <b>Category</b> : {{alert_category}}
-                    <input class="star" type="checkbox" title="Favorite" ng-show=$root.userLoggedIn ng-click="updateFavoritesPoints(POINTid)" ng-checked="fav">
-                    <br>
-                    <b>Rank</b> : {{ alert_RANK }}
-                    <br>
-                    <b>Number of views</b> : {{alert_NOV}}
-                    <br>
-                    <b>Number of review</b> : {{alert_NOR}}
-                    <br>
-                    <b>Description</b> : {{alert_desc}}
-                    <br>
-                    <br>
-                    <h4><b>Last 2 reviews</b></h4>
+                        <div align="left">
+                                <b class="font">Category</b> : {{alert_category}}
+                                <input class="star" type="checkbox" title="Favorite" ng-show=$root.userLoggedIn ng-click="updateFavoritesPoints(POINTid)" ng-checked="fav">
+                                <br>
+                                <b class="font">Rank</b> : {{ alert_RANK }}
+                                <br>
+                                <b class="font">Number of views</b> : {{alert_NOV}}
+                                <br>
+                                <b class="font">Number of review</b> : {{alert_NOR}}
+                                <br>
+                                <b class="font">Description</b> : {{alert_desc}}
+                                <br>
+                                <br>
+                        </div>
+
+                   
+                    <h4><b class="font">Last 2 reviews</b></h4>
                     <p align="center" ng-repeat="poi in twoLastReview">
-                        <b>Review</b> : {{ poi.REVIEW }}<br>
-                        <b>Date</b> : {{poi.DATE.substr(0,10)}}
+                        <b class="font">Review</b> : {{ poi.REVIEW }}<br>
+                        <b class="font">Date</b> : {{poi.DATE.substr(0,10)}}
                         <br>
                         <br>
                     </p>
@@ -37,13 +53,13 @@
                     <br>
 
 
-                    <input  type="text"
+                    <input class="input" type="text"
                             name="rank_input"
                             style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
                             id="rank_input"
                             placeholder="Enter rank"
                             ng-model="POICtrl.rank_input"/>
-                    <input  type="text"
+                    <input class="input" type="text"
                             name="review_input"
                             style="width: 300px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
                             id="review_input"
@@ -54,7 +70,7 @@
                     <p style="color:red">{{alert_addReview}}</p>
 
 
-                    <button ng-click="POICtrl.AddReview()" type="button" class="btn btn-primary">Add review</button>
+                    <button ng-click="POICtrl.AddReview()" id="button" type="button" class="btn btn-primary">Add review</button>
 
                 </div>
             </div>
@@ -62,7 +78,8 @@
     </div>
 
     <br><br>
-<select type="text"
+    <h1 class="font" style="font-size: 160%;">Selcet a category</h1>
+<select id="font" type="text"
         class="form-control"
         name="categoryToFilter"
         style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
@@ -77,8 +94,8 @@
 
 
 <br>
-
-<input  type="text"
+<h1 class="font" style="font-size: 160%;">Insert point name</h1>
+<input  id="font" type="text"
         name="wordToSearch"
         style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
         id="wordToSearch" class="form-control"
@@ -87,8 +104,9 @@
         required/>
 <br>
 
+
 <div class="form-actions">
-    <a  href="" class="btn btn-primary" type="submit" ng-disabled="form.$invalid" class="btn btn-primary"
+    <a  href=""  id="button" class="btn btn-primary" type="submit" ng-disabled="form.$invalid" class="btn btn-primary"
         ng-click="POICtrl.Search()">Search</a>
 </div>
 
@@ -105,20 +123,26 @@
 </div>
 
 
-    <div align="center" ng-repeat="poi in poisToShowAfterOrder">
-        *****************************************
-        {{poi.name}}
-        *****************************************
+    <div class="font" align="center" ng-repeat="poi in poisToShowAfterOrder">
+        
+        <div class="secondTitle"> {{poi.name}} </div>
+        <br>
 
-        <p ng-repeat="i in poi.elements">
-            POI Name: {{ i.NAME }}<br>
-            POI Rank: {{ i.RANK }}<br>
-            POI Category: {{ i.CATEGORY }}<br>
-            <img data-toggle="modal" data-target="#exampleModal" ng-click="POICtrl.showAllInformation(i)" height="400" width="600" ng-src="{{ i.IMAGE }}" />
+        <div class="font" align="center" ng-repeat="i in poi.elements">
+            <div class="textOverImage">
+                    <img class="active" data-toggle="modal" data-target="#exampleModal" ng-click="POICtrl.showAllInformation(i)" height="600" alt="Snow" style="width:80%;" ng-src="{{ i.IMAGE }}" />
+                   <img class="active" ng-show="!isGuest" id="{{i.POI_ID}}" ng-src="{{initFuncToFillStarButton(i)}}" ng-click="myFunction(i)"  height="50"  width="50"/>
+                    <div class="bottom-left">
+                     {{ i.NAME }}<br>
+                    Rank: {{ i.RANK }}<br>
+                    Category: {{ i.CATEGORY }}<br>
+                    </div>
+            </div>
+        </br>
+        </br>
+        </br>   
+        </div>      
 
-            <img ng-show="!isGuest" id="{{i.POI_ID}}" ng-src="{{initFuncToFillStarButton(i)}}" ng-click="myFunction(i)" class="favorite" height="50"  width="50"/></img>
-
-        </p>
     </div>
 
 </center>

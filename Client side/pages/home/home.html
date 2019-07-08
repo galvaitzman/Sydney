@@ -1,31 +1,41 @@
 <center>
 
+
+        <div class="textOverImage">
+                <img  src="https://www.australiancruisegroup.com.au/data/subcategory/000029_8a53e64c/acg-sightseeing-banner.jpg"  height="50%"
+                width="100%" />
+                <div class="centered">Welcome To Sydney</div>
+         </div>
+
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel"><b>{{alert_name}}</b></h4>
+                    <h4  class="modal-title" id="exampleModalLabel"><b class="font" align="center">{{alert_name}}</b></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+            
                 <div class="modal-body">
                     <!-- <div class = "single-img" ng-repeat="x in records"> -->
-                    <b>Category</b> : {{alert_category}}
+                        <div align="left">
+                    <b class="font">Category</b> : {{alert_category}}
                     <br>
-                    <b>Rank</b> : {{ alert_RANK}}
+                    <b class="font">Rank</b> : {{ alert_RANK}}
                     <br>
-                    <b>Number of views</b> : {{alert_NOV}}
+                    <b class="font">Number of views</b> : {{alert_NOV}}
                     <br>
-                    <b>Number of review</b> : {{alert_NOR}}
+                    <b class="font">Number of review</b> : {{alert_NOR}}
                     <br>
-                    <b>Description</b> : {{alert_desc}}
+                    <b class="font">Description</b> : {{alert_desc}}
                     <br>
                     <br>
-                    <h4><b>Last 2 reviews</b></h4>
+                </div>
+                    <h4><b class="font">Last 2 reviews</b></h4>
                     <p align="center" ng-repeat="poi in twoLastReview">
-                        <b>Review</b> : {{ poi.REVIEW }}<br>
-                        <b>Date</b> : {{poi.DATE.substr(0,10)}}
+                        <b class="font">Review</b> : {{ poi.REVIEW }}<br>
+                        <b  class="font">Date</b> : {{poi.DATE.substr(0,10)}}
                         <br>
                         <br>
                     </p>
@@ -37,13 +47,13 @@
                     <br>
 
 
-                    <input  type="text"
+                    <input  class="input" type="text"
                             name="rank_input"
                             style="width: 100px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
                             id="rank_input"
                             placeholder="Enter rank"
                             ng-model="homeCtrl.rank_input"/>
-                    <input  type="text"
+                    <input class="input" type="text"
                             name="review_input"
                             style="width: 300px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
                             id="review_input"
@@ -54,47 +64,60 @@
                     <p style="color:red">{{alert_addReview}}</p>
 
 
-                    <button ng-click="homeCtrl.AddReview()" type="button" class="btn btn-primary">Add review</button>
-
+                    <button id="button" ng-click="homeCtrl.AddReview()" type="button" class="btn btn-primary">Add review</button>
+            
                 </div>
             </div>
         </div>
     </div>
+<br>
+    <div  class="secondTitle"ng-show="isGuest" > Places your must visit</div>
+    <br>
+    <div class="font" align="center" ng-repeat="poi in random3POIlist" ng-show="isGuest">       
+        <div class="textOverImage">
+            <img class="active" data-toggle="modal" data-target="#exampleModal" ng-click="homeCtrl.showAllInformation(poi)" height="600" alt="Snow" style="width:80%;" ng-src="{{ poi.IMAGE }}" />
+            <div class="bottom-left" >
+            {{ poi.NAME }}<br />
+           Rank: {{ poi.RANK }}<br />
+        </div>
+        </div>
+    </br>
+    </br>
+    </br>   
+    </div>
 
-
-    <p align="center" ng-repeat="poi in random3POIlist" ng-show="isGuest">
-  POI Name: {{ poi.NAME }}<br />
-  POI Rank: {{ poi.RANK }}<br />
-  <img data-toggle="modal" data-target="#exampleModal" ng-click="homeCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
-
-
-
-</p>
-
-<h2 ng-show="!isGuest">Two Last Saved Points</h2>
+<h2 class="secondTitle" ng-show="!isGuest">Two Last Saved Points</h2>
+<br>
+<div class="font" align="center" ng-repeat="poi in twoLastSavedPoints" ng-show="!isGuest">
+    <div class="textOverImage">
+        <img class="active" data-toggle="modal" data-target="#exampleModal" ng-click="homeCtrl.showAllInformation(poi)" height="600" alt="Snow" style="width:80%;" ng-src="{{ poi.IMAGE }}" />
+        <div class="bottom-left" >
+        {{ poi.NAME }}<br />
+        Rank: {{ poi.RANK }}<br />
+    </div>
+    </div>
+</br>
+</br>
+</br>   
+</div>
 
 <br>
-
-<p ng-repeat="poi in twoLastSavedPoints" ng-show="!isGuest" >
-
-    POI Name: {{ poi.NAME }}<br />
-    POI Rank: {{ poi.RANK }}<br />
-    <img data-toggle="modal" data-target="#exampleModal" ng-click="homeCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
-    
-</p>
-
-<br>
 <br>
 
-<h1 ng-show="!isGuest">Two Most Popular Points</h1>
-
+<h1 class="secondTitle" ng-show="!isGuest">Two Most Popular Points</h1>
 <br>
-
-<p ng-repeat="poi in twoMostPopularPoints" ng-show="!isGuest">
-    POI Name: {{ poi.NAME }}<br />
-    POI Rank: {{ poi.RANK }}<br />
-    <img data-toggle="modal" data-target="#exampleModal" ng-click="homeCtrl.showAllInformation(poi)" height="400" width="600" ng-src="{{ poi.IMAGE }}" />
-</p>
+<div class="font" align="center" ng-repeat="poi in twoMostPopularPoints"ng-show="!isGuest">
+        <div class="textOverImage">
+            <img class="active" data-toggle="modal" data-target="#exampleModal" ng-click="homeCtrl.showAllInformation(poi)" height="600" alt="Snow" style="width:80%;" ng-src="{{ poi.IMAGE }}" />
+            <div class="bottom-left" >
+            {{ poi.NAME }}<br />
+           Rank: {{ poi.RANK }}<br />
+        </div>
+        </div>
+    </br>
+    </br>
+    </br>   
+    </div>
 </p>
 <br>
 

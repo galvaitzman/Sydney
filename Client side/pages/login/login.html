@@ -1,45 +1,80 @@
-
 <center>
-    <br><br>
-<form class= "logIn-form" name="form" role="form">
-<div class="form-group" ng-class="{ 'has-error': form.USER_NAME.$dirty && form.USER_NAME.$error.required }">
-            <label for="USER_NAME">User Name</label>
-            <input  type="text"
-                    name="USER_NAME"
-                     style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
-                    id="USER_NAME" class="form-control"
-                    ng-model="loginCtrl.USER_NAME"
-                    placeholder="Enter Username"
-                    autocomplete="off"
-                    required/>
-            <span ng-show="form.USER_NAME.$dirty && form.USER_NAME.$error.required" class="help-block">Username is required</span>
-</div>
+  <div class="textOverImage">
+    <img
+      height="30%"
+      width="100%"
+      src="https://in.sydney.com/sites/international/files/styles/header_slider/public/2017-03/Harbour-Lights-and-Dress-Circle-lighting-up-Sydney-Harbour-during-Vivid-Sydney-2016.jpg?itok=6kvtFOMQ"
+    />
+    <div class="centered">LOGIN</div>
+  </div>
+  <br />
+  <form class="logIn-form" name="form" role="form">
+    <div
+      class="form-group"
+      ng-class="{ 'has-error': form.USER_NAME.$dirty && form.USER_NAME.$error.required }"
+    >
+      <label class="font" for="USER_NAME">User Name</label>
+      <input
+        type="text"
+        name="USER_NAME"
+        style="width: 350px; height: 30px; margin-top: 20px; margin-bottom: 20px;"
+        id="USER_NAME"
+        class="form-control"
+        ng-model="loginCtrl.USER_NAME"
+        placeholder="Enter Username"
+        autocomplete="off"
+        required
+      />
+      <span
+        id="font"
+        ng-show="form.USER_NAME.$dirty && form.USER_NAME.$error.required"
+        class="help-block"
+        >Username is required</span
+      >
+    </div>
 
-<div class="form-group" ng-class="{ 'has-error': form.PASSWORD.$dirty && form.PASSWORD.$error.required }">
-           <label for="PASSWORD" >Password</label>
-           <input  type="password"
-                   name="PASSWORD"
-                   style="width: 350px; height: 30px; margin-top: 20px;"
-                   id="PASSWORD" class="form-control"
-                   placeholder="Enter Password"
-                   autocomplete="off"
-                   ng-model="loginCtrl.PASSWORD" required/>
-           <span ng-show="form.PASSWORD.$dirty && form.PASSWORD.$error.required" class="help-block">Password is required</span>
-</div>
+    <div
+      class="form-group"
+      ng-class="{ 'has-error': form.PASSWORD.$dirty && form.PASSWORD.$error.required }"
+    >
+      <label class="font" for="PASSWORD">Password</label>
+      <input
+        type="password"
+        name="PASSWORD"
+        style="width: 350px; height: 30px; margin-top: 20px;"
+        id="PASSWORD"
+        class="form-control"
+        placeholder="Enter Password"
+        autocomplete="off"
+        ng-model="loginCtrl.PASSWORD"
+        required
+      />
+      <span
+        ng-show="form.PASSWORD.$dirty && form.PASSWORD.$error.required"
+        class="help-block"
+        >Password is required</span
+      >
+    </div>
 
-<br><br>
-    <p style="color:red">{{alert_login}}</p>
-<div class="form-actions">
-               <a  href="" class="btn btn-primary" type="submit"
-                       ng-click="loginCtrl.Login()">Submit</a>
-       </div>
-    <br>
+    <p style="color:red">{{ alert_login }}</p>
+    <div class="form-actions">
+      <a
+        id="button"
+        href=""
+        class="btn btn-primary"
+        type="submit"
+        ng-click="loginCtrl.Login()"
+        >Submit</a
+      >
+    </div>
+    <br />
 
-    <a  href="#!forgotPassword" class="btn btn-primary">Forgot your password?</a>
-    <br>
-    <br>
-    <a class="btn btn-primary" href="#!register">Register</a>
-
-
-</form>
+    <a class="font" href="#!forgotPassword" class="btn btn-primary"
+      >Forgot your password?</a
+    >
+    <br />
+    <br />
+    <a class="font">Still not a member? Join us for free </a
+    ><a id="font" class="btn btn-primary" href="#!register">Register</a>
+  </form>
 </center>
