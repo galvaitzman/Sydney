@@ -100,19 +100,39 @@ angular
     $scope.lengthOfAllSavePoints = 0;
 
     $scope.existingFavList = [];
+    $scope.thereIsFavoritePoints = false;
+    $scope.thereIsNoFavoritePointsMessage = "";
     var tempFavorites = JSON.parse(localStorage.getItem("favoriteList"));
     if (tempFavorites != null) {
       for (var i = 0; i < tempFavorites.length; i = i + 1) {
         if (tempFavorites[i].currentUser == $rootScope.currentUser)
           $scope.existingFavList.push(tempFavorites[i]);
       }
+      if ($scope.existingFavList.length > 0)
+        $scope.thereIsFavoritePoints = true;
+    }
+
+    if ($scope.existingFavList.length == 0) {
+      $scope.thereIsFavoritePoints = false;
+      $scope.thereIsNoFavoritePointsMessage =
+        "There is no points marked as favorite";
     }
 
     self.getAllSavedPoints = function() {
       favoriteServices.getAllSavedPoints().then(
         function(response) {
+          ////////
+          $scope.thereIsSavedPoints = false;
+          $scope.thereIsNoSavedPointsMessage = "";
           $scope.allSavedPoints = response.data;
           $scope.lengthOfAllSavePoints = $scope.allSavedPoints.length;
+
+          if ($scope.lengthOfAllSavePoints > 0) {
+            $scope.thereIsSavedPoints = true;
+          } else {
+            $scope.thereIsSavedPoints = false;
+            $scope.thereIsNoSavedPointsMessage = "There is no saved points";
+          }
           for (var i = 1; i <= $scope.lengthOfAllSavePoints; i = i + 1) {
             $scope.rankList.push({ id: i, isDisabled: false, poi_id: -1 });
           }

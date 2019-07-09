@@ -132,8 +132,10 @@
     type="submit"
     class="btn btn-primary"
     ng-click="favoriteCtrl.saveFavoritePointsToServer()"
-    >Save new points to favorites</a
-  >
+    ng-show="thereIsFavoritePoints"
+    >Save new points to favorites</a>
+    <p class="font" >{{ thereIsNoFavoritePointsMessage }} </p>
+
   <br />
   <br />
   <br />
@@ -185,9 +187,13 @@
       class="btn btn-link"
       class="btn btn-primary"
       type="button"
+      ng-show="thereIsSavedPoints"
       ng-click="favoriteCtrl.changePoisOrder()"
     >
       save new order
     </button>
+
+    <p class="font">{{ thereIsNoSavedPointsMessage }} </p>
+
   </div>
 </center>
